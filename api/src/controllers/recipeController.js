@@ -11,7 +11,8 @@ const createRecipe = async (
     name,
     resumenDelPlato,
     pasoAPaso,
-    healthScore)=> await Recipes.create({name,resumenDelPlato,pasoAPaso,healthScore});
+    healthScore,
+    image)=> await Recipes.create({name,resumenDelPlato,pasoAPaso,healthScore, image});
     
     
     const getRecipe = async (id, source)=>{
