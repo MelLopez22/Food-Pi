@@ -1,5 +1,5 @@
 const {Router} = require('express');
-const { postHandler, getAllRecipeHandler, getRecipeByIdHandler } = require('../handlers/recipeHandler');
+const { postRecipeHandler, getAllRecipeHandler, getRecipeByIdHandler } = require('../handlers/recipeHandler');
 
 const recipeRoute = Router();
 
@@ -12,7 +12,7 @@ const recipeRoute = Router();
      recipeRoute.get('/', getAllRecipeHandler)
 
     
-     recipeRoute.post('/', postHandler)
+     recipeRoute.post('/', postRecipeHandler)
 
 module.exports = recipeRoute
 
