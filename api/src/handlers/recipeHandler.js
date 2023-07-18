@@ -1,7 +1,6 @@
 //LOS HANDLERS NO DEBEN INTERACTUAR CON LOS MODELOS
 
-const { createRecipe } = require("../controllers/recipeController");
-
+const { createRecipe , getRecipe} = require("../controllers/recipeController");
 
 
 //funcion q va a crear una receta
@@ -9,9 +8,8 @@ const postRecipeHandler = async (req, res) => {
   try {
     const { name, resumenDelPlato, pasoAPaso, healthScore } = req.body;
     //OJO FALTA LA IMAGEN
-    console.log(name, resumenDelPlato, pasoAPaso, healthScore)
+    console.log(name, resumenDelPlato, pasoAPaso, healthScore);
     const newRecipe = await createRecipe(
-      
       name,
       resumenDelPlato,
       pasoAPaso,
@@ -30,10 +28,16 @@ const getAllRecipeHandler = (req, res) => {
     : res.status(200).send("me trae todas las recetas");
 };
 //funcion que obtiene una receta por su id
-const getRecipeByIdHandler = (req, res) => {
-  const { id } = req.params;
-
-  res.status(200).send(`detalle de la receta con ${id}`);
+const getRecipeByIdHandler = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const source = isNaN(id) ? "bdd" : "api";
+    const recipe = await getRecipe(id, source);
+    console.log(source, recipe)
+    res.status(200).json(recipe);
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
 };
 
 module.exports = {

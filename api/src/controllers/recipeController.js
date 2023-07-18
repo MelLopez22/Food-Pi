@@ -1,4 +1,11 @@
 const {Recipes} = require('../db')
+require('dotenv').config();
+const {
+    API_KEY
+  } = process.env;
+  const axios = require("axios");
+
+
 
 const createRecipe = async ( 
     name,
@@ -6,6 +13,12 @@ const createRecipe = async (
     pasoAPaso,
     healthScore)=> await Recipes.create({name,resumenDelPlato,pasoAPaso,healthScore});
     
-
-
-module.exports={createRecipe}
+    
+    const getRecipe = async (id, source)=>{
+        const recipe = source === 'api'?
+       ( await axios(`https://api.spoonacular.com/recipes/${id}/information?apiKey=${API_KEY}`)).data:
+        await Recipes.findByPk(id);
+        console.log('soy el loggg', recipe)
+        return recipe
+    }
+module.exports={createRecipe, getRecipe}
