@@ -1,25 +1,85 @@
-const {Recipes} = require('../db')
-require('dotenv').config();
-const {
-    API_KEY
-  } = process.env;
-  const axios = require("axios");
+const { Recipes } = require("../db");
+require("dotenv").config();
+const { API_KEY } = process.env;
+const axios = require("axios");
 
+const cleanRecipesInfo = (arr) =>
+  arr.map((el) => {
+    return {
+      id: el.id,
+      name: el.title,
+      resumenDelPlato: el.summary,
 
+      healthScore: el.healthScore,
 
-const createRecipe = async ( 
+      pasoAPaso: el.analyzedInstructions,
+      image: el.image,
+      created: false,
+    };
+  });
+
+const createRecipe = async (
+  name,
+  resumenDelPlato,
+  pasoAPaso,
+  healthScore,
+  image,
+  created
+) =>
+  await Recipes.create({
     name,
     resumenDelPlato,
     pasoAPaso,
     healthScore,
-    image)=> await Recipes.create({name,resumenDelPlato,pasoAPaso,healthScore, image});
-    
-    
-    const getRecipe = async (id, source)=>{
-        const recipe = source === 'api'?
-       ( await axios(`https://api.spoonacular.com/recipes/${id}/information?apiKey=${API_KEY}`)).data:
-        await Recipes.findByPk(id);
-        console.log('soy el loggg', recipe)
-        return recipe
-    }
-module.exports={createRecipe, getRecipe}
+    image,
+    created,
+  });
+
+const getRecipe = async (id, source) => {
+  const recipe =
+    source === "api"
+      ? (
+          await axios(
+            `https://api.spoonacular.com/recipes/${id}/information?apiKey=${API_KEY}`
+          )
+        ).data
+      : await Recipes.findByPk(id);
+  console.log("soy el loggg", recipe);
+  return recipe;
+};
+
+const getRecipeByName = async (name) => {
+  //buscar en bdd todos los que coincidan con name
+  const recipesBdd = await Recipes.findAll({ were: name });
+  const recipesApi = (
+    await axios.get(
+      `https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY}&addRecipeInformation=true`
+    )
+  ).data.results;
+
+  const recipesJustClean = cleanRecipesInfo(recipesApi);
+
+  const filteredApi = recipesJustClean.filter((el)=>
+     el.name === name
+  )
+
+  return [...recipesBdd, ...filteredApi];
+
+};
+
+const getAllRecipe = async () => {
+  const recipesBdd = await Recipes.findAll();
+
+  const recipesApi = (
+    await axios.get(
+      `https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY}&addRecipeInformation=true`
+    )
+  ).data.results;
+
+  const recipesJustClean = cleanRecipesInfo(recipesApi);
+  console.log(recipesJustClean);
+
+  return [...recipesBdd, ...recipesJustClean];
+};
+
+module.exports = { createRecipe, getRecipe, getAllRecipe, getRecipeByName };
