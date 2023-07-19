@@ -2,6 +2,8 @@ const { Recipes } = require("../db");
 require("dotenv").config();
 const { API_KEY } = process.env;
 const axios = require("axios");
+const { Op } = require('sequelize');
+
 
 const cleanRecipesInfo = (arr) =>
   arr.map((el) => {
@@ -50,17 +52,22 @@ const getRecipe = async (id, source) => {
 
 const getRecipeByName = async (name) => {
   //buscar en bdd todos los que coincidan con name
-  const recipesBdd = await Recipes.findAll({ were: name });
+  const recipesBdd = await Recipes.findAll({  where: {
+    name: {
+      [Op.like]: `%${name}%`,
+    },
+  },});
   const recipesApi = (
     await axios.get(
-      `https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY}&addRecipeInformation=true`
+      `https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY}&addRecipeInformation=true&number=100`
     )
   ).data.results;
 
   const recipesJustClean = cleanRecipesInfo(recipesApi);
 
   const filteredApi = recipesJustClean.filter((el)=>
-     el.name === name
+    //  el.name === name
+    el.name.toLowerCase().includes(name.toLowerCase())
   )
 
   return [...recipesBdd, ...filteredApi];
@@ -72,12 +79,11 @@ const getAllRecipe = async () => {
 
   const recipesApi = (
     await axios.get(
-      `https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY}&addRecipeInformation=true`
+      `https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY}&addRecipeInformation=true&number=100`
     )
   ).data.results;
 
   const recipesJustClean = cleanRecipesInfo(recipesApi);
-  console.log(recipesJustClean);
 
   return [...recipesBdd, ...recipesJustClean];
 };
