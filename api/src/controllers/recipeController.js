@@ -42,7 +42,8 @@ const getRecipe = async (id, source) => {
     source === "api"
       ? (
           await axios(
-            `https://api.spoonacular.com/recipes/${id}/information?apiKey=${API_KEY}`
+            // `https://api.spoonacular.com/recipes/${id}/information?apiKey=${API_KEY}`
+            `https://api.spoonacular.com/recipes/${id}/information?apiKey=5c5b6e3c4b16413781c43cab91b337b1`
           )
         ).data
       : await Recipes.findByPk(id);
@@ -79,7 +80,7 @@ const getAllRecipe = async () => {
 
   const recipesApi = (
     await axios.get(
-      `https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY}&addRecipeInformation=true&number=100`
+      `https://api.spoonacular.com/recipes/complexSearch?apiKey=5c5b6e3c4b16413781c43cab91b337b1&addRecipeInformation=true&number=100`
     )
   ).data.results;
 
