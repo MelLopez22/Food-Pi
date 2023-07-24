@@ -65,48 +65,36 @@ const getRecipeByIdHandler = async (req, res) => {
   }
 };
 
+
+
+
+
+
 const getAllRecipeHandler = async (req, res) => {
+  const { name } = req.query;
+
   try {
-    const { name } = req.query;
-
-    // Obtener todas las recetas de la base de datos con sus dietas asociadas
-    const recipesBdd = name
+    const results = name
+    //que tipo de datos me trae byname y getall
       ? await getRecipeByName(name)
-      : await getAllRecipe();
+      : await getAllRecipes();
+// si mi results esta vacio
+    // if (results.length === 0) {
+    //   return res
+    //     .status(404)
+    //     .json({ message: "La raza especificada no existe" });
+    // }
 
-    // Obtener todas las recetas de la API junto con sus tipos de dietas
-    const recipesApi = (
-      await axios.get(
-        `https://api.spoonacular.com/recipes/complexSearch?apiKey=5c5b6e3c4b16413781c43cab91b337b1&addRecipeInformation=true&number=100`
-      )
-    ).data.results;
-
-    // Obtener todas las dietas de la API
-    const dietsApi = recipesApi.reduce((acc, recipe) => {
-      recipe.diets.forEach((diet) => {
-        if (!acc.includes(diet)) {
-          acc.push(diet);
-        }
-      });
-      return acc;
-    }, []);
-
-    // Limpiar y combinar las recetas de la API
-    const recipesJustClean = cleanRecipesInfo(recipesApi);
-    const filteredApi = name
-      ? recipesJustClean.filter((el) =>
-          el.name.toLowerCase().includes(name.toLowerCase())
-        )
-      : recipesJustClean;
-
-    // Combinar las recetas de la base de datos con las recetas limpias de la API
-    const allRecipes = [...recipesBdd, ...filteredApi];
-
-    res.status(200).json({ recipes: allRecipes, diets: dietsApi });
+    
+    //si tiene algo devolver el dato
+    return res.status(200).json(results);
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
 };
+
+
+
 
 
 module.exports = {
