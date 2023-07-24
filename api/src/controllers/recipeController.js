@@ -5,6 +5,7 @@ const axios = require("axios");
 const { Op } = require("sequelize");
 
 const cleanRecipesInfo = (arr) =>
+
   arr.map((el) => {
     return {
       id: el.id,
@@ -15,12 +16,10 @@ const cleanRecipesInfo = (arr) =>
 
       pasoAPaso: el.analyzedInstructions,
       image: el.image,
+diets: element.diets,
       created: false,
     };
-  });
-
-
-//   name,
+    //   name,
 //   resumenDelPlato,
 //   pasoAPaso,
 //   healthScore,
@@ -39,28 +38,14 @@ const cleanRecipesInfo = (arr) =>
 //   return newrec
 
 // }
- 
-//cuando traiga la info de la api necesito limpiarla , devolverla 
-//y esa es la voy a enviar 
+  });
 
-// const getRecipe = async (id, source) => {
-//   //deberia pasarle un array a cleanrecipeinfo 
-//   const recipeApi = (
-//     await axios(
-//       // `https://api.spoonacular.com/recipes/${id}/information?apiKey=${API_KEY}`
-//       `https://api.spoonacular.com/recipes/${id}/information?apiKey=5c5b6e3c4b16413781c43cab91b337b1`
-//     )
-//   ).data.results
-//   console.log(recipeApi)
 
-//   const recipeApiCLeaned = cleanRecipesInfo(recipeApi)
-//   console.log('recipes limpias', recipeApiCLeaned)
-//   const recipe =
-//     source === "api"
-//       ? recipeApiCLeaned
-//       : await Recipes.findByPk(id, {include:Diets});
-//   return recipe;
-// };
+
+
+
+
+//LISTO
 const getRecipe = async (id, source) => {
   if (source === "api") {
     const recipeApi = (
@@ -77,6 +62,10 @@ const getRecipe = async (id, source) => {
     return recipe;
   }
 };
+
+
+
+// -----------------------OBTENER RECETA POR NAME X QUERY-----------------------------------
 
 // const getRecipeByName = async (name) => {
 //   // Buscar en la base de datos todas las recetas que coincidan con el nombre
@@ -111,7 +100,7 @@ const getRecipe = async (id, source) => {
 // };
 
 
-
+// ---------------------------------------OBTENER TODAS LAS RECETAS JUNTAS API Y BDD -------------------------
 // const getAllRecipe = async () => {
 //   // Traigo las recetas de mi base de datos incluyendo las dietas asociadas
 //   const recipesBdd = await Recipes.findAll({
@@ -140,32 +129,37 @@ const getRecipe = async (id, source) => {
 
 
 const getRecipeByName = async (name) => {
-  //paso a minuscula
-  const tolowercaseName = name.toLowerCase();
-  //peticion a la bdd
-  //traigo todo lo q hay en mi bdd de recetas
-  const recipesDataBase = await Recipes.findAll({
-    where: { name: { [Op.iLike]: "%" + tolowercaseName + "%" } },
-    //que me incluya el modelo dietas
+  // Buscar en la base de datos todas las recetas que coincidan con el nombre
+  const recipesBdd = await Recipes.findAll({
+    where: {
+      name: {
+        [Op.like]: `%${name}%`,
+      },
+    },
     include: {
       model: Diets,
-      attributes:['name']
+      attributes: ['name'], // Especificamos que solo queremos el campo 'name' de 'Diets'
     },
   });
 
+  // Obtener las recetas de la API
+  const recipesApi = (
+    await axios.get(
+      `https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY}&addRecipeInformation=true&number=100`
+    )
+  ).data.results;
 
-  //peticion a la api
-  //recordar el .results
-  const allRecipesRaw= (await axios(`https://api.spoonacular.com/recipes/complexSearch?apiKey=4d3769ea6cbe4284b8e3dff7e1bbfe28&addRecipeInformation=true&number=100`))
-    .data.results;
-    //uso la funcion de limpieza 
-  const allRecipesResults = cleanRecipesInfo(allRecipesRaw);
+  // Limpiar las recetas de la API e incluir las dietas asociadas
+  const recipesJustClean = cleanRecipesInfo(recipesApi);
 
-  const allRecipesResultByName = allRecipesResults.filter((elem) =>
-    elem.name.toLowerCase().includes(tolowercaseName)
-  );
+  recipesJustClean.forEach((el, index) => {
+    const diets = recipesApi[index].diets;
+    if (diets && diets.length > 0) {
+      el.diets = diets;
+    }
+  });
 
-  return [...recipesDataBase, ...allRecipesResultByName];
+  return [...recipesBdd, ...recipesJustClean];
 };
 
 const getAllRecipes = async () => {
