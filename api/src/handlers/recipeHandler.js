@@ -5,24 +5,7 @@ const {Op} = require('sequelize')
 require("dotenv").config();
 const { API_KEY } = process.env;
 
-// const cleanRecipesInfo = (array) =>
-//   array.map((element) => {
-//     return {
-//       id: element.id,
-//       name: element.title,
-//       image:
-//         element.image && element.image.url
-//           ? element.image.url
-//           : element.reference_image_id
-//           ? `https://cdn2.thedogapi.com/images/${element.reference_image_id}.jpg`
-//           : null,
-//       height: element.height?.metric || "",
-//       weight: element.weight?.metric || "",
-//       life_span: element.life_span,
-//       created: false,
-//       diets: element.diets
-//     };
-//   });
+
 
 //listo ---------- CREAR UNA RECETA EN BDD
 const postRecipeHandler = async (req, res) => {
@@ -80,6 +63,8 @@ const getRecipeByIdHandler = async (req, res) => {
   }
 };
 
+
+//------------------------LIMPIEZA DE ARRAY
 const cleanningArray = (arr) =>
   arr.map((el) => {
     return {
@@ -134,6 +119,28 @@ const getRecipeByName = async (name) => {
   //deberia crear un array que contenga todo lo resultados? y retornar ese array
   // si no se encuentra nada enviar mensaje de que la busqueda no arrojo resultados
 };
+
+const getAllRecipes = async()=> {
+//consultar a mi bdd y que me traiga todas las recetas con sus dietas asociadastb 
+//consultar mi api y que me traiga todas las recetas con sus dietas asociadas
+//unificar todo en un array y retornar ese array 
+//-----------------------consulto las recetas que hay en mi bdd 
+const recipesFromDataBase = await Recipes.findAll({
+  include: [
+    {
+      model: Diets,
+      attributes: ["name"],
+    },
+  ],
+});
+
+const recipesFromApi = (await axios(`https://api.spoonacular.com/recipes/complexSearch?apiKey=4d3769ea6cbe4284b8e3dff7e1bbfe28&addRecipeInformation=true&number=100`)).data.results;
+const recipesApiCleaned = cleanningArray(recipesFromApi);
+
+return [...recipesFromDataBase, ...recipesApiCleaned]
+
+
+}
 
 const getAllRecipeHandler = async (req, res) => {
   //preguntar si hay por query name ?
