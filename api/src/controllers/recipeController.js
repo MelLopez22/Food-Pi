@@ -40,18 +40,43 @@ const cleanRecipesInfo = (arr) =>
 
 // }
  
+//cuando traiga la info de la api necesito limpiarla , devolverla 
+//y esa es la voy a enviar 
 
+// const getRecipe = async (id, source) => {
+//   //deberia pasarle un array a cleanrecipeinfo 
+//   const recipeApi = (
+//     await axios(
+//       // `https://api.spoonacular.com/recipes/${id}/information?apiKey=${API_KEY}`
+//       `https://api.spoonacular.com/recipes/${id}/information?apiKey=5c5b6e3c4b16413781c43cab91b337b1`
+//     )
+//   ).data.results
+//   console.log(recipeApi)
+
+//   const recipeApiCLeaned = cleanRecipesInfo(recipeApi)
+//   console.log('recipes limpias', recipeApiCLeaned)
+//   const recipe =
+//     source === "api"
+//       ? recipeApiCLeaned
+//       : await Recipes.findByPk(id, {include:Diets});
+//   return recipe;
+// };
 const getRecipe = async (id, source) => {
-  const recipe =
-    source === "api"
-      ? (
-          await axios(
-            // `https://api.spoonacular.com/recipes/${id}/information?apiKey=${API_KEY}`
-            `https://api.spoonacular.com/recipes/${id}/information?apiKey=5c5b6e3c4b16413781c43cab91b337b1`
-          )
-        ).data
-      : await Recipes.findByPk(id, {include:[Diets]});
-  return recipe;
+  if (source === "api") {
+    // Realizar petición a la API
+    const recipeApi = (
+      await axios(
+        `https://api.spoonacular.com/recipes/${id}/information?apiKey=5c5b6e3c4b16413781c43cab91b337b1`
+      )
+    ).data;
+
+    const recipeApiCleaned = cleanRecipesInfo(recipeApi);
+    return recipeApiCleaned;
+  } else {
+    // Realizar consulta en la base de datos
+    const recipe = await Recipes.findByPk(id, { include: Diets });
+    return recipe;
+  }
 };
 
 const getRecipeByName = async (name) => {

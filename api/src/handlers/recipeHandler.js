@@ -4,33 +4,6 @@ const { getRecipe, getAllRecipe, getRecipeByName} = require("../controllers/reci
 const {Recipes, Diets}=require('../db')
 
 
-//funcion q va a crear una receta
-// const postRecipeHandler = async (req, res) => {
-//   try {
-//     const {name, resumenDelPlato, pasoAPaso, healthScore, image, created, DietId } = req.body;
-
-//     const exists = await Recipes.findAll({ where:{name}})
-// if(exists.length){
-//     throw new Error("ya existe una receta con este nombre")
-// } 
-//     const newRecipe = await Recipes.create(
-//      { name,
-//       resumenDelPlato,
-//       pasoAPaso,
-//       healthScore,
-//       image,
-//       created});
-//       if (DietId && Array.isArray(DietId) && DietId.length > 0) {
-//         const dietsToAssociate = await Diets.findAll({ where: { id: DietId } });
-//         await newRecipe.setDiets(dietsToAssociate);
-//       }
-
-//     res.status(201).json(newRecipe);
-//   } catch (error) {
-//     res.status(400).json({ error: error.message });
-//   }
-// };
-
 const postRecipeHandler = async (req, res) => {
   try {
     const { name, resumenDelPlato, pasoAPaso, healthScore, image, diets } = req.body;
@@ -77,17 +50,41 @@ const getAllRecipeHandler = async (req, res) => {
 
 //funcion que obtiene una receta por su id
 //LIMPIAR la info
+// const getRecipeByIdHandler = async (req, res) => {
+//   try {
+//     // const { id } = req.params;
+//     const id = parseInt(req.params.id);
+
+//     const source = isNaN(id) ? "bdd" : "api";
+//     const recipe = await getRecipe(id, source);
+//     res.status(200).json(recipe);
+//   } catch (error) {
+//     res.status(400).json({ error: error.message });
+//   }
+// };
 const getRecipeByIdHandler = async (req, res) => {
   try {
-    const { id } = req.params;
-    const source = isNaN(id) ? "bdd" : "api";
+    const id = req.params.id;
+
+    // Verificar si el id es un número o un string con solo números
+    const isNumericId = /^\d+$/.test(id);
+
+    let source;
+    if (isNumericId) {
+      source = "api";
+    } else {
+      source = "bdd";
+    }
+
     const recipe = await getRecipe(id, source);
-    console.log(source, recipe)
     res.status(200).json(recipe);
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
 };
+
+
+
 
 module.exports = {
   postRecipeHandler,

@@ -5,9 +5,9 @@ module.exports = (sequelize) => {
   // defino el modelo
   sequelize.define('Diets', {
     id: {
-      type: DataTypes.UUID,
-      defaultValue: DataTypes.UUIDV4,
+      type: DataTypes.INTEGER, // Cambiamos a INTEGER para el autoincremental
       primaryKey: true,
+      autoIncrement: true, // Establecemos autoIncrement como true
     },
     name: {
       type: DataTypes.STRING,
