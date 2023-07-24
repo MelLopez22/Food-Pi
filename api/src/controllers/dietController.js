@@ -2,7 +2,7 @@ const axios = require("axios");
 const { API_KEY } = process.env;
 require("dotenv").config();
 //usar la apikey del mail principal o la del mail creado si se agotan las peticiones por dia 
-const { Diets } = require("../db");
+const { Diets } = require('../db')
 
 const getAllDietsExists = async()=>{
     const dietNames = [];
