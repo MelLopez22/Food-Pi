@@ -3,7 +3,8 @@ import { ADD_RECIPES } from "./actions";
 
 
 const initialState = {
-  recipes:[]
+  recipes:[],
+  recipesOriginal:[]
 };
 
 export default function reducer(state = initialState, { type, payload }) {
@@ -11,7 +12,8 @@ export default function reducer(state = initialState, { type, payload }) {
   case ADD_RECIPES:
     return {
       ...state,
-      recipes:payload
+      recipes:payload,
+      recipesOriginal:payload
     }
  
   default:
