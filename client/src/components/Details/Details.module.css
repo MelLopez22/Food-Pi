@@ -1,0 +1,47 @@
+.dt{
+    margin: 0;
+    background-image: url('../../icons/details.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment:fixed;
+    position: absolute;
+    width: 100%;
+    color: white;
+    display: flex;
+    flex-direction: row;
+}
+
+.preDetail{
+    /* border: solid 3px white; */
+    width: 30%;
+    height: 1200px;
+    padding: 50px;
+    background-color: rgba(0, 0, 0, 0.8);
+    float: left;
+}
+
+.imga{
+    height: 350px;
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+
+.detailDescription{
+    width: auto;
+    border: solid 3px white;
+    float: right;
+    height: fit-content;
+    margin-left: 150px;
+    margin-top: 180px;
+    display: flex;
+    flex-direction:column;
+    text-align: justify;
+    font-size: 25px;
+}
+
+.btn{
+    float: right;
+    margin-top: 30px;
+    width: 130px;
+}
+  
