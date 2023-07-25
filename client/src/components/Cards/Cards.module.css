@@ -1,0 +1,5 @@
+.cardsContainer {
+    display: flex;
+    flex-wrap: wrap; /* Permite que las cards se acomoden en múltiples líneas si no caben en una sola */
+    justify-content: space-between; /* Distribuye las cards de manera equitativa en el contenedor */
+  }
