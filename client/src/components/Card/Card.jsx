@@ -1,8 +1,8 @@
-import styles from './Card.module.css'
+// import styles from './Card.module.css'
 
 export default function Card () {
 return (
     <div>
-      CARD  
+      ONE CARD  
     </div>
 )}
