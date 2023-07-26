@@ -26,3 +26,8 @@ conn.sync({ alter: true }).then(() => {
     console.log(`http://localhost:3001`); // eslint-disable-line no-console
   });
 });
+
+
+
+          
+ 

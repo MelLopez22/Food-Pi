@@ -49,12 +49,8 @@ const getRecipeByIdHandler = async (req, res) => {
     // Verificar si el id es un número o un string con solo números
     const isNumericId = /^\d+$/.test(id);
 
-    let source;
-    if (isNumericId) {
-      source = "api";
-    } else {
-      source = "bdd";
-    }
+    let source = isNumericId? 'api':'bdd'
+   
 
     const recipe = await getRecipe(id, source);
     res.status(200).json(recipe);
