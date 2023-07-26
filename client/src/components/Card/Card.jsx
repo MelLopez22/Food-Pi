@@ -1,10 +1,13 @@
+import { Link } from 'react-router-dom';
 import './Card.css';
 
 
-const Card = ({ name, image, diets }) => {
+const Card = ({ name, image, diets, id }) => {
   return (
+    <Link to={`/detail/${id}`}>
     <div className="card">
-      <img className="card-image" src={image} alt={name} />
+     <img className="card-image" src={image} alt={name} />
+      
       <div className="card-content">
         <h3 className="card-name">{name}</h3>
         <ul className="card-diets">
@@ -14,6 +17,8 @@ const Card = ({ name, image, diets }) => {
         </ul>
       </div>
     </div>
+    </Link>
+
   );
 };
 

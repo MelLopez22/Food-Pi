@@ -4,11 +4,8 @@ const { API_KEY } = process.env;
 const axios = require("axios");
 const { Op } = require("sequelize");
 
-//
 
-//
 
-//LISTO --- trae receta por id
 
 //------------------------LIMPIEZA DE ARRAY
 const cleanningArray = (arr) => {
@@ -156,36 +153,65 @@ const getAllRecipes = async () => {
       },
     ],
   });
+  const recipesBddCLEAN = recipesFromDataBase.map((recipe) => {
+    const diets = recipe.Diets.map((diet) => ({
+      name: diet.name,
+      DietId: diet.RecipeDiet.DietId}))
 
+  return {
+      id: recipe.id,
+      name: recipe.name,
+      resumenDelPlato: recipe.resumenDelPlato,
+      healthScore: recipe.healthScore,
+      pasoAPaso: recipe.pasoAPaso,
+      image: recipe.image,
+      Diets: diets,
+      created: true,
+    };
+
+    })
+
+
+  // Recetas de la API
   const recipesFromApi = (
     await axios.get(
       `https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY}&addRecipeInformation=true&number=100`
     )
   ).data.results;
 
-  const recipesApiCleaned = cleanningArray(recipesFromApi);
+  //me trae un array
+  //aqui ingreso a steps q es un array con objetos con los datos q necesito
+  // console.log(recipesFromApi[0].analyzedInstructions[0].steps)
+  // console.log(recipesFromApi[0].analyzedInstructions[0].steps[0].number,recipesFromApi[0].analyzedInstructions[0].steps[0].step )
 
-  // Función para formatear los pasos de la receta en un array con objetos
-  const formatSteps = (steps) => {
-    if (!Array.isArray(steps)) return [];
 
-    return steps.map((step, index) => ({
-      number: index + 1,
-      step,
-    }));
-  };
+  const recipesApiCleaned = recipesFromApi.map((recipe) => {
+// console.log(recipe.analyzedInstructions[0].steps)
+//mapear steps recordar q es un array 
+const stepsARR = recipe.analyzedInstructions[0]?.steps?.map(e=>{
+  return {
+    number: e.number,
+    step: e.step
+  }
+})
+console.log(stepsARR)//esto me devuelve un array limpio de info 
 
-  // Formatear los pasos para cada receta en el array de la API
-  recipesApiCleaned.forEach((recipe) => {
-    recipe.pasoAPaso = formatSteps(recipe.pasoAPaso);
-  });
 
-  // Formatear los pasos para cada receta de la base de datos en el array
-  recipesFromDataBase.forEach((recipe) => {
-    recipe.pasoAPaso = formatSteps(recipe.pasoAPaso);
-  });
+    return {
+      id: recipe.id,
+      name: recipe.title,
+      resumenDelPlato: recipe.summary,
+      healthScore: recipe.healthScore,
+      pasoAPaso: stepsARR,
+      image: recipe.image,
+      Diets: recipe.diets,
+      created: false,
+    };
+  }); 
 
-  return [...recipesFromDataBase, ...recipesApiCleaned];
+  // Unificar recetas de la base de datos y la API
+  return [...recipesBddCLEAN, ...recipesApiCleaned];
+
 };
 
 module.exports = { getRecipe, getRecipeByName, getAllRecipes };

@@ -25,7 +25,7 @@ function Cards() {
       {recipes?.map((el) => {
          const dietsArray = returnArray(el.Diets);
         return (
-          <Card name={el.name} image={el.image} diets={dietsArray} key={el.id} />
+          <Card name={el.name} image={el.image} diets={dietsArray} key={el.id} id={el.id}/>
         );
       })}
     </div>

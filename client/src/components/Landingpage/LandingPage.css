@@ -1,0 +1,62 @@
+/* Estilos para el componente LandingPage */
+.landing-page {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .animated-text {
+    font-size: 150px;
+    color: white;
+    animation: typeAnimation 2s steps(9, end);
+    font-family: 'Gaegu', cursive;
+  }
+  
+  @keyframes typeAnimation {
+    0% {
+      width: 0;
+      overflow: hidden;
+    }
+    100% {
+      width: 200px; /* Cambia esto al ancho que desees */
+    }
+  }
+  
+  .social-links {
+    margin-top: 20px;
+  }
+  
+  .social-links a {
+    display: inline-block;
+    margin: 0 10px;
+    opacity: 0.8;
+    transition: opacity 0.3s ease;
+  }
+  .social-links a img{
+   width: 50px;
+   height: 50px;
+  }
+  
+  .social-links a:hover {
+    opacity: 1;
+  }
+  
+  .enter-button {
+    margin-top: 30px;
+    padding: 10px 20px;
+    background-color: #fff; /* Cambia esto al color que desees */
+    color: #333; /* Cambia esto al color de texto que desees */
+    font-size: 18px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+  
+  .enter-button:hover {
+    background-color: #333; /* Cambia esto al color que desees */
+    color: #fff; /* Cambia esto al color de texto que desees */
+  }
+  
