@@ -42,8 +42,10 @@ function Cards() {
             diets={dietsArray}
             key={el.id}
             id={el.id}
+            healthScore={el.healthScore ? el.healthScore : 0}
           />
         );
+        
       })}
       </div>
      

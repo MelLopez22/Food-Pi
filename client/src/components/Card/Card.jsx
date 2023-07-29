@@ -2,7 +2,8 @@ import { Link } from 'react-router-dom';
 import './Card.css';
 
 
-const Card = ({ name, image, diets, id }) => {
+const Card = ({ name, image, diets, id, healthScore }) => {
+  console.log(healthScore, 'HEALTHSCORE')
   return (
     <Link to={`/detail/${id}`}>
     <div className="card">
@@ -10,6 +11,7 @@ const Card = ({ name, image, diets, id }) => {
       
       <div className="card-content">
         <h3 className="card-name">{name}</h3>
+        <h3 className="card-name">HEALTHSCORE {healthScore}</h3>
         <ul className="card-diets">
           {diets.map((diet, index) => (
             <li key={index}>{diet}</li>

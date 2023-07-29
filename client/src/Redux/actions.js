@@ -4,6 +4,7 @@ export const NEXT_PAGE = 'NEXT_PAGE'
 export const ADD_DIETS = 'ADD_DIETS'
 export const FILTER = 'FILTER'
 export const ORDER = 'ORDER'
+export const ORDER_BYDIET = 'ORDER_BYDIET'
 
 
 export function addRecipes (recipes) {
@@ -42,3 +43,9 @@ export function order (order) {
         payload : order
     }
 }
+export const orderByHealthscore = (diet) => {
+    return {
+      type: ORDER_BYDIET,
+      payload: diet,
+    };
+  };

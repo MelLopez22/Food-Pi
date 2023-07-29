@@ -9,7 +9,7 @@ import Footer from "../Footer/Footer";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import axios from "axios";
-import { addDiets, addRecipes, order } from "../../Redux/actions";
+import { addDiets, addRecipes, order, orderByHealthscore } from "../../Redux/actions";
 import styles from "./HomePage.module.css";
 // import styles from "./Home.module.css";
 
@@ -35,12 +35,15 @@ export default function Homepage() {
     fetchData();
   }, []);
 
-  function handleOrder(event) {
+  const handleOrder = (event) => {
     event.preventDefault();
-    const { value } = event.target;
-    console.log(value)
-    dispatch(order(value));
-  }
+    const { name, value } = event.target;
+    if (name === 'order') {
+      dispatch(order(value));
+    } else if (name === 'orderByHealthscore') {
+      dispatch(orderByHealthscore(value));
+    }
+  };
 
   return (
     <div className={styles.container}>
@@ -74,6 +77,7 @@ export default function Homepage() {
           name="checkbox3" />
         </aside>
         <div>
+          {/* ordenar por name */}
         <select
           name="order"
           defaultValue={"DEFAULT"}
@@ -85,6 +89,13 @@ export default function Homepage() {
           <option value="A">Ascendente</option>
           <option value="D">Descendente</option>
         </select>
+        {/* ordenar por healthscore */}
+        <select name="orderByHealthscore" defaultValue="DEFAULT" onChange={handleOrder}>
+        <option value="DEFAULT" disabled>
+Ordenar por Healthscore        </option>
+        <option value="A">Ascendente</option>
+        <option value="D">Descendente</option>
+      </select>
         </div>
       </div>
 
