@@ -1,5 +1,14 @@
 .cardsContainer {
-    display: flex;
-    flex-wrap: wrap; /* Permite que las cards se acomoden en múltiples líneas si no caben en una sola */
-    justify-content: space-between; /* Distribuye las cards de manera equitativa en el contenedor */
-  }
+  display: inline-block;
+  flex-wrap: wrap;
+  justify-content: center;
+  max-height: 50%;
+  margin: 0; /* Elimina cualquier margen */
+  padding: 0; /* Elimina cualquier padding */
+  overflow: hidden; /* Evita que el contenido sobresalga del contenedor */
+  
+}
+
+.paginate, .recipes{
+  display: block;
+}

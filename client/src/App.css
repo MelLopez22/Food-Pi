@@ -1,38 +1,36 @@
 /* Estilos generales para la aplicación */
-  @import url('https://fonts.googleapis.com/css2?family=Gaegu:wght@700&display=swap');
-body {
+@import url('https://fonts.googleapis.com/css2?family=Gaegu:wght@700&display=swap');
+
+/* body {
   margin: 0;
   padding: 0;
   font-family: Arial, sans-serif;
   color: white;
-}
+} */
 
 /* Estilos para la imagen de fondo */
-.app {
+/* .app {
   background-image: url('../src/img/school-board-empty-slate.jpg');
-  background-size: cover;
   background-position: center;
-  height: 100vh; /* La imagen ocupará todo el alto de la pantalla */
+  height: 100vh; 
   display: flex;
   justify-content: center;
   align-items: center;
   text-align: center;
-}
+} */
+  /* background-size: cover; */
 
-/* Estilos para los elementos dentro de la aplicación */
-.app-content {
-  /* Estos estilos son opcionales y pueden ajustarse según tus necesidades */
+
+/* .app-content {
   max-width: 800px;
   padding: 20px;
-}
+} */
 
-/* Estilos para los enlaces (por ejemplo, en el Navbar) */
-.app a {
+/* .app a {
   color: white;
   text-decoration: none;
 }
 
-/* Estilos para los títulos */
 .app h1 {
   margin-bottom: 20px;
 }
@@ -46,4 +44,4 @@ body {
   font-size: 16px;
   line-height: 1.5;
   margin-bottom: 20px;
-}
+} */

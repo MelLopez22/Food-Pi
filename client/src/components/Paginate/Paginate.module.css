@@ -1,4 +1,4 @@
-.paginationContainer {
+/* .paginationContainer {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -37,4 +37,17 @@
   .currentPageNumber {
     background-color: #dcf5d5;
     color: #000000;
+  } */
+
+  .paginate-buttons-container {
+    /* Alinea los botones uno al lado del otro */
+    display: inline-block;
   }
+  
+  .paginate-button {
+    /* Ajusta el espaciado entre los botones si es necesario */
+    margin: 0 5px;
+    /* Muestra los botones en línea */
+    display: inline-block;
+  }
+  

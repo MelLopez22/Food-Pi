@@ -1,0 +1,30 @@
+/* Detail.module.css */
+
+.detailContainer {
+  display: flex;
+  flex-wrap: wrap;
+}
+.div-columns{
+  display: flex;
+}
+
+.leftColumn,
+.rightColumn {
+  padding: 50px;
+    flex: 1; /* Hace que ambos divs ocupen el mismo espacio en el contenedor */
+    width: 50%; /* Ocupan el 50% del ancho del contenedor padre */
+    height: 50vh; /* Ocupan el 50% de la altura del contenedor padre (puedes ajustar la altura según tus necesidades) */
+    /* Agrega otros estilos según tus necesidades */
+  }
+
+
+.rightColumn img {
+  width: 100%; /* Asegura que la imagen ocupe todo el ancho del contenedor */
+  height: 100%; /* Asegura que la imagen ocupe todo el alto del contenedor */
+  object-fit: cover; /* Ajusta la imagen para que cubra todo el contenedor sin distorsionarse */
+}
+
+.bottomRow {
+  width: 100%;
+  padding: 16px;
+}

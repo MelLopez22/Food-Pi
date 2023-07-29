@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
-
+import "./Details.css"
 function Detail() {
   const [recipe, setRecipe] = useState({});
   const { id } = useParams();
@@ -10,9 +10,9 @@ function Detail() {
   useEffect(() => {
     const fetchRecipe = async (id) => {
       try {
-        const response = await axios.get(`http://localhost:3001/recipes/eb240114-4cc4-48cd-8f5b-caff4a222d5d`);
+        const response = await axios.get(`http://localhost:3001/recipes/${id}`);
         const data = response.data;
-console.log('este es el id recibido para la peticion')
+        console.log("este es el id recibido para la peticion");
         if (data.name) {
           setRecipe(data);
         } else {
@@ -25,34 +25,39 @@ console.log('este es el id recibido para la peticion')
 
     fetchRecipe(id);
   }, []);
-console.log(typeof recipe.pasoAPaso)
-  // console.log(recipe.pasoAPaso[0].steps, "este es el pasoapaso");
-  //[{                         }]
+  console.log(recipe);
+ 
 
   return (
-    <div>
-      <h1>{recipe.name}</h1>
-    <p>{recipe.resumenDelPlato}</p>
-      <p>{recipe.healthScore}</p>
+    <div className='detailContainer'>
+        <h1>NAME {recipe.name}</h1>
+      <div className="div-columns">
+                {/* Columna Izquierda */}
+                <div className='leftColumn'>
+                {/* Utilizar dangerouslySetInnerHTML para renderizar el contenido HTML */}
+                <p dangerouslySetInnerHTML={{ __html: recipe.resumenDelPlato }} />
+                <p>HEALTHSCORE {recipe.healthScore}</p>
+                <p>{/* Aquí puedes mostrar las dietas */}</p>
+                </div>
 
-          <p>Paso a paso: </p>
-        {/* FUNCIONA PARA PASOS QUE VIENEN DE LA API */}
-        PASO A PASO PARA LAS RECETAS QUE VIENEN DE BDD
+                {/* Columna Derecha */}
+                <div className='rightColumn'>
+                  <img src={recipe.image} alt={recipe.name} />
+                </div>
+        </div>
+    
 
-      {/* <ul>
-        {recipe.pasoAPaso[0].steps.map((step, index) => {
-          return <li key={step.number}>
-            Paso {step.number}: {step.step}
-          </li>
-        }
-          
-        )}
-      </ul> */}
-
-      {/* <p>{recipe.Diets}</p>
-      <img src={recipe.image} alt={recipe.name} />
-
-      <p>Summary: {recipe.summary}</p> */}
+      {/* Paso a Paso */}
+      <div className={'bottomRow'}>
+        <p>Paso a paso: </p>
+        <ul>
+          {recipe.pasoAPaso?.map((step, index) => (
+            <li key={index}>
+              {step.number} : {step.step}
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 }

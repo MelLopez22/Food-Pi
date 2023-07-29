@@ -12,7 +12,7 @@ const cleanningArray = (arr) => {
   if (Array.isArray(arr)) {
     return arr.map((el) => {
       //limpiar analizedintruccions
-      const cleanningInfoApi = el.analyzedInstructions[0].step.steps;
+      const cleanningInfoApi = el.analyzedInstructions[0]?.step?.steps;
       const pasoapaso = cleanningInfoApi.map((e) => {
         return { number: e.number, step: e.step };
       });
@@ -30,7 +30,7 @@ const cleanningArray = (arr) => {
     });
   } else if (typeof arr === "object") {
     // Si arr es un objeto, creamos un nuevo objeto con la información deseada
-    const cleanAnalizedInstructions = arr.analyzedInstructions[0].steps;
+    const cleanAnalizedInstructions = arr.analyzedInstructions[0]?.steps;
     const pasoAPasoCLEAN = cleanAnalizedInstructions.map((e) => {
       return { number: e.number, step: e.step };
     });
@@ -55,9 +55,7 @@ const getRecipe = async (id, source) => {
   //si es x api
   if (source === "api") {
     const recipeApi = (
-      await axios(
-        `https://api.spoonacular.com/recipes/${id}/information?apiKey=${API_KEY}`
-      )
+      await axios(`https://api.spoonacular.com/recipes/${id}/information?apiKey=${API_KEY}`)
     ).data;
     console.log(typeof recipeApi, "tipo de dato de la api");
     //limpio la info cruda --------funcion para limpiar la infocruda
@@ -113,9 +111,7 @@ const getRecipeByName = async (name) => {
   });
 
   const recipesApi = (
-    await axios.get(
-      `https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY}&addRecipeInformation=true&number=100`
-    )
+    await axios.get(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY}&addRecipeInformation=true&number=100`)
   ).data.results;
 
   const nameLower = name.toLowerCase();
@@ -174,9 +170,7 @@ const getAllRecipes = async () => {
 
   // Recetas de la API
   const recipesFromApi = (
-    await axios.get(
-      `https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY}&addRecipeInformation=true&number=100`
-    )
+    await axios.get(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY}&addRecipeInformation=true&number=100`)
   ).data.results;
 
   //me trae un array
