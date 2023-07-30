@@ -17,9 +17,7 @@ const Paginate = ({ cantidadPages }) => {
   }
 
   return (
-    console.log(cantidadPages),
     <div className={styles.paginateButtons}>
-      <div className={styles['paginate-buttons-container']}>
         {numPage > 1 ? (
           <div className={styles['paginate-button']}>
             <button onClick={prev}>Anterior</button>
@@ -34,7 +32,6 @@ const Paginate = ({ cantidadPages }) => {
           </div>
         ) : null}{" "}
       </div>
-    </div>
   );
   
 };

@@ -12,43 +12,44 @@ function Cards() {
   let cantidadPages = Math.floor(recipes.length / 9);
   let viewRecipes = recipes.slice(desde, hasta);
 
-  function returnArray() {
-    const dietsNamesArray = recipes.map((el) => {
-      if (Array.isArray(el.Diets)) {
-        // Si Diets es un array de objetos, extraemos los nombres
-        return el.Diets.map((diet) => diet.name);
-      } else {
-        // Si Diets es un array de strings, simplemente lo devolvemos
-        return el.Diets;
-      }
-    });
+  // function returnArray() {
+  //   const dietsNamesArray = recipes.map((el) => {
+  //     if (Array.isArray(el.Diets)) {
+  //       // Si Diets es un array de objetos, extraemos los nombres
+  //       return el.Diets.map((diet) => diet.name);
+  //     } else {
+  //       // Si Diets es un array de strings, simplemente lo devolvemos
+  //       return el.Diets;
+  //     }
+  //   });
 
-    return dietsNamesArray;
-  }
+  //   return dietsNamesArray;
+  // }
 
   return (
     <div className={styles.cardsContainer}>
-      <div className={styles.paginate}> 
+      <div className={styles.paginate}>
         <Paginate cantidadPages={cantidadPages} />
       </div>
 
       <div className={styles.recipes}>
-         {viewRecipes?.map((el) => {
-        const dietsArray = returnArray(el.Diets);
-        return (
-          <Card
-            name={el.name}
-            image={el.image}
-            diets={dietsArray}
-            key={el.id}
-            id={el.id}
-            healthScore={el.healthScore ? el.healthScore : 0}
-          />
-        );
-        
-      })}
+        {viewRecipes?.map((el) => {
+          // const dietsArray = returnArray(el.Diets);
+          return (
+            <div key={el.id}>
+              <Card
+                name={el.name}
+                image={el.image}
+                diets={el.Diets}
+                key={el.id}
+                id={el.id}
+                healthScore={el.healthScore ? el.healthScore : 0}
+              />
+            </div>
+          );
+        })}
       </div>
-     
+
       <div className={styles.paginate}>
         <Paginate cantidadPages={cantidadPages} />
       </div>

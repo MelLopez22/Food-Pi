@@ -5,6 +5,8 @@ export const ADD_DIETS = 'ADD_DIETS'
 export const FILTER = 'FILTER'
 export const ORDER = 'ORDER'
 export const ORDER_BYDIET = 'ORDER_BYDIET'
+export const FILTER_BY_DIETS = 'FILTER_BY_DIETS'
+export const RESET = 'RESET'
 
 
 export function addRecipes (recipes) {
@@ -29,13 +31,7 @@ export function addDiets (diets) {
         payload:diets
     }
 }
-export function filterByDiets (diets) {
-    console.log(diets)
-    return{
-        type: FILTER,
-        payload : diets
-    }
-}
+
 
 export function order (order) {
     return{
@@ -47,5 +43,17 @@ export const orderByHealthscore = (diet) => {
     return {
       type: ORDER_BYDIET,
       payload: diet,
+    };
+  };
+  //payload sera un array 
+export const filterByDiets = (diet) => {
+    return {
+      type: FILTER_BY_DIETS,
+      payload: diet,
+    };
+  };
+export const reset = () => {
+    return {
+      type: RESET
     };
   };

@@ -1,14 +1,20 @@
 .cardsContainer {
-  display: inline-block;
+  display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: space-around;
   max-height: 50%;
   margin: 0; /* Elimina cualquier margen */
   padding: 0; /* Elimina cualquier padding */
-  overflow: hidden; /* Evita que el contenido sobresalga del contenedor */
+  /* overflow: hidden; Evita que el contenido sobresalga del contenedor */
   
 }
 
 .paginate, .recipes{
-  display: block;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+
+.paginate{
+  max-width: 100%;
 }
