@@ -56,7 +56,7 @@ export default function Homepage() {
   };
 
   //manejador de filtrado
-
+//solo esta hecho x tipos de dietas
   const handleCheckboxChange = (event) => {
     const { value, checked } = event.target;
     console.log(value, 'VALUE')
@@ -70,7 +70,6 @@ export default function Homepage() {
     console.log(filtrado); 
     dispatch(filterByDiets([...filtrado]))
   };
-  
 
   const handleReset = () => {
     setSelectedCheckboxes([]);
