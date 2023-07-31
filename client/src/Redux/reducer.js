@@ -1,4 +1,4 @@
-import { ADD_RECIPES, NEXT_PAGE, PREV_PAGE, ADD_DIETS, FILTER, ORDER, ORDER_BYDIET, FILTER_BY_DIETS, RESET } from "./actions";
+import { ADD_RECIPES, NEXT_PAGE, PREV_PAGE, ADD_DIETS, FILTER, ORDER, ORDER_BYDIET, FILTER_BY_DIETS, RESET, FILTER_BY_NAME } from "./actions";
 
 
 
@@ -39,7 +39,7 @@ export default function reducer(state = initialState, { type, payload }) {
         payload === "All"
           ? allRec
           : allRec.filter((t) =>
-              t.Diets.find((e) => e.name === payload)
+              t.diets.find((e) => e.name === payload)
             );
       return {
         ...state,
@@ -76,6 +76,11 @@ case ORDER:
       return {
         ...state,
         recipes: state.recipesOriginal, // Restauramos las recetas originales
+      };
+    case FILTER_BY_NAME:
+      return {
+        ...state,
+        recipes: payload, // Restauramos las recetas originales
       };
   default:
     return state

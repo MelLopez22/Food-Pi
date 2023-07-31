@@ -21,7 +21,8 @@ const cleanningArray = (arr) => {
         healthScore: el.healthScore,
         pasoAPaso: pasoapaso,
         image: el.image,
-        Diets: el.diets,
+        diets: el.diets,
+        // Diets: el.diets,
         created: false,
       };
     });
@@ -40,7 +41,8 @@ const cleanningArray = (arr) => {
       healthScore: arr.healthScore,
       pasoAPaso: pasoAPasoCLEAN,
       image: arr.image,
-      Diets: arr.diets,
+      diets: arr.diets,
+      // Diets: arr.diets,
       created: false,
     };
   } else {
@@ -79,7 +81,8 @@ const getRecipe = async (id, source) => {
         healthScore: recipe.healthScore,
         pasoAPaso: recipe.pasoAPaso,
         image: recipe.image,
-        Diets: dietsNames,
+        diets: dietsNames,
+        // Diets: dietsNames,
         created: true,
       };
     } else {
@@ -115,7 +118,8 @@ const getRecipeByName = async (name) => {
         healthScore: recipe.healthScore,
         pasoAPaso: recipe.pasoAPaso,
         image: recipe.image,
-        Diets: dietsNames,
+        diets: dietsNames,
+        // Diets: dietsNames,
         created: true,
       };
     });
@@ -149,7 +153,8 @@ const getRecipeByName = async (name) => {
       healthScore: e.healthScore,
       pasoAPaso: pasoapaso,
       image: e.image,
-      Diets: e.diets,
+      diets: e.diets,
+      // Diets: e.diets,
       created: false,
     };
   });
@@ -172,6 +177,7 @@ const getAllRecipes = async () => {
     });
     return {
       // Aquí, puedes incluir las demás propiedades de la receta que deseas devolver
+      id: recipe.id,
       name: recipe.name,
       healthScore: recipe.healthScore,
       image: recipe.image,
@@ -216,7 +222,8 @@ const getAllRecipes = async () => {
       healthScore: recipe.healthScore,
       pasoAPaso: stepsARR,
       image: recipe.image,
-      Diets: recipe.diets,
+      diets: recipe.diets,
+      // Diets: recipe.diets,
       created: false,
     };
   });

@@ -24,17 +24,29 @@ function Modal({ oncloseModal }) {
 
 
   const handleAgregarDiets = (event) => {
-    const { value } = event.target;
-    setDietsArr((prevDietsArr) => {
-      if (!prevDietsArr.includes(value)) {
-        // Si el valor aún no está en el array, agrégalo
-        return [...prevDietsArr, value];
-      } else {
-        // Si el valor ya está en el array, quítalo
-        return prevDietsArr.filter((item) => item !== value);
-      }
-    });
+    const { name, value, checked } = event.target;
+  
+    if (checked) {
+      // Si el checkbox está marcado (checked=true), agrega el valor al array de dietsArr
+      setDietsArr((prevDietsArr) => {
+        if (!prevDietsArr.includes(value)) {
+          // Si el valor aún no está en el array, agrégalo
+          setData((prevData) => ({
+            ...prevData,
+            diets: [...prevDietsArr, value],
+          }));
+          return [...prevDietsArr, value];
+        }
+        // Si el valor ya está en el array, no es necesario agregarlo nuevamente
+        return prevDietsArr;
+      });
+    } else {
+      // Si el checkbox está desmarcado (checked=false), remueve el valor del array de dietsArr
+      setDietsArr((prevDietsArr) => prevDietsArr.filter((item) => item !== value));
+    };
+   
   };
+  
   
   const handleAgregar = () => {
     if (newStep.trim() !== "") {
@@ -90,6 +102,7 @@ function Modal({ oncloseModal }) {
 
   return (
     console.log('TODO LO Q HAY EN DATA QUE SE VA A ENVIAR A M BACK', data),
+    console.log('valores de mi array de tipos de dietas', dietsArr),
     <div className="modal-container">
       <div className="modal-background" onClick={oncloseModal}></div>
       <div className="modal-content-container">
@@ -147,7 +160,7 @@ function Modal({ oncloseModal }) {
       <input
         type="checkbox"
         id={index + 1}
-        name={'diets'}
+        name={name}
         value={index + 1}
         onChange={handleAgregarDiets}
         checked={dietsArr.includes(String(index + 1))}

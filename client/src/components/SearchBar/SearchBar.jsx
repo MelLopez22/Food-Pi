@@ -1,23 +1,36 @@
-import { useDispatch } from "react-redux";
-import { filterByDiets } from "../../Redux/actions";
-
-
-// a medida que vaya escribiendo en el input quiero que se vaya ejecutando a action de ir filtrando y renderizando mis recetas 
+import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { filterName } from "../../Redux/actions";
 
 function SearchBar() {
-  const dispatch = useDispatch()
-  const handleSearch = (event)=>{
-  const {value} = event.target;
-  console.log(value)
-  dispatch(filterByDiets(value))
-  }
+  const dispatch = useDispatch();
+  const { recipes } = useSelector((state) => state);
+console.log(recipes)
+  const [searchValue, setSearchValue] = useState(""); // Estado local para mantener el valor del input
+
+  const handleSearch = (event) => {
+    const { value } = event.target;
+    console.log(value)
+    setSearchValue(value); // Actualiza el estado local con el valor del input
+
+    const filterByName = recipes.filter((e) => {
+      return e.name.toLowerCase().includes(value.toLowerCase());
+    });
+
+    console.log(filterByName, 'filterbyname')
+    console.log(recipes, 'recipes')
+
+    // Enviamos el array filtrado para modificar el estado de recetas en Redux
+    dispatch(filterName(filterByName));
+  };
+
   return (
-    <div>SearchBar
-      <label htmlFor="">Buscar</label>
-      <input type="text" name="search" value='search' onChange={handleSearch}/>
-      <button></button>
+    console.log('esto es searchvalue', searchValue),
+    <div>
+      <label htmlFor="">BUSCAR RECETAS POR NOMBRE</label>
+      <input type="text" name="search" value={searchValue} onChange={handleSearch} />
     </div>
-  )
+  );
 }
 
-export default SearchBar
+export default SearchBar;

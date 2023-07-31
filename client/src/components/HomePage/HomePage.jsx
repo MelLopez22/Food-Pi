@@ -69,15 +69,12 @@ if (diets && diets.length === 0) {
 //solo esta hecho x tipos de dietas
   const handleCheckboxChange = (event) => {
     const { value, checked } = event.target;
-    console.log(value, 'VALUE')
     const filtrado = checked
       ? recipes.filter((e) =>{
-      console.log(e.Diets, 'DIETS')
-         return e.Diets.some((diet) => diet.toLowerCase() === value.toLowerCase())}
+         return e.diets.some((diet) => diet.toLowerCase() === value.toLowerCase())}
         )
       : 'dios me ampareeeee lpm';
   
-    console.log(filtrado); 
     dispatch(filterByDiets([...filtrado]))
   };
 

@@ -1,6 +1,8 @@
 import Modal from '../Modal/Modal';
 import SearchBar from '../SearchBar/SearchBar'
 import { useState } from "react";
+import styles from "./NavBar.module.css";
+
 
 export default function NavBar(){
   const [modalVisible, setModalVisible] = useState(false);
@@ -14,11 +16,8 @@ export default function NavBar(){
     console.log(modalVisible)
   };
   return (
-    <div>
-      <h1>
-          ESTO ES EL NAVBAR EN CONSTRUCCION
-        LOGO 
-      </h1>
+    <div className={styles.navbarContainer}>
+     <img src="/" alt="LOGO" />
   
         <SearchBar/>
         <button onClick={handleOpenModal}>CREAR RECETA</button>
