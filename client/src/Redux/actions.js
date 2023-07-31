@@ -6,6 +6,7 @@ export const FILTER = 'FILTER'
 export const ORDER = 'ORDER'
 export const ORDER_BYDIET = 'ORDER_BYDIET'
 export const FILTER_BY_DIETS = 'FILTER_BY_DIETS'
+export const FILTER_BY_CREATED = 'FILTER_BY_CREATED'
 export const RESET = 'RESET'
 export const FILTER_BY_NAME = 'FILTER_BY_NAME'
 
@@ -51,6 +52,12 @@ export const filterByDiets = (diet) => {
     return {
       type: FILTER_BY_DIETS,
       payload: diet,
+    };
+  };
+export const filterByCreated = (recipes) => {
+    return {
+      type: FILTER_BY_CREATED,
+      payload: recipes,
     };
   };
 export const reset = () => {

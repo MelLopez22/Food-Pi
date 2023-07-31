@@ -11,6 +11,7 @@ import axios from "axios";
 import {
   addDiets,
   addRecipes,
+  filterByCreated,
   filterByDiets,
   order,
   orderByHealthscore,
@@ -31,20 +32,15 @@ export default function Homepage() {
       try {
         const response = (await axios.get("http://localhost:3001/recipes"))
           .data;
-          dispatch(addRecipes(response));
+        dispatch(addRecipes(response));
 
-          console.log('data diets', (await axios.get("http://localhost:3001/diets")).data)
-//verificar si existe diets , y si length es igual a cero hacer la peticion , si no nada 
-if (diets && diets.length === 0) {
-  const responseDiets = (await axios.get("http://localhost:3001/diets")).data;
-  if (responseDiets.length > 0) {
-    dispatch(addDiets(responseDiets));
-  }
-}
-
-
-          
-        
+        if (diets && diets.length === 0) {
+          const responseDiets = (await axios.get("http://localhost:3001/diets"))
+            .data;
+          if (responseDiets.length > 0) {
+            dispatch(addDiets(responseDiets));
+          }
+        }
 
         setIsChecked(false);
       } catch (error) {
@@ -65,17 +61,35 @@ if (diets && diets.length === 0) {
     }
   };
 
-  //manejador de filtrado
-//solo esta hecho x tipos de dietas
+  //manejador de filtrado x dietas
+  //solo esta hecho x tipos de dietas
   const handleCheckboxChange = (event) => {
-    const { value, checked } = event.target;
-    const filtrado = checked
-      ? recipes.filter((e) =>{
-         return e.diets.some((diet) => diet.toLowerCase() === value.toLowerCase())}
-        )
-      : 'dios me ampareeeee lpm';
+    const { name, value, checked } = event.target;
+    //si value corresponde a bdd o api , si es bdd comparar de recipes.create: true, si es de api created:false
+    if(name === 'api'){
+      const filterAPI= recipes.filter(e=>{
+        return e.created === false
+      })
+
+      dispatch(filterByCreated(filterAPI))
+    }else if(name === 'bdd'){
+      const filterBDD= recipes.filter(e=>{
+        return e.created === true
+      });
+      dispatch(filterByCreated(filterBDD))
+
+    }else {
+      const filtrado = checked
+        ? recipes.filter((e) => {
+            return e.diets.some(
+              (diet) => diet.toLowerCase() === value.toLowerCase()
+            );
+          })
+        : recipes; // Si no hay filtro activo, mantener las recetas sin cambios
+    
+      dispatch(filterByDiets([...filtrado]));
+    }
   
-    dispatch(filterByDiets([...filtrado]))
   };
 
   const handleReset = () => {
@@ -127,6 +141,27 @@ if (diets && diets.length === 0) {
               <label htmlFor={name}>{name}</label>
             </div>
           ))}
+          <div>
+            <input
+              type="checkbox"
+              id={"bdd"}
+              name={"bdd"}
+              value={"bdd"}
+              onChange={handleCheckboxChange}
+            />
+            <label htmlFor={"bdd"}>{"Bdd"}</label>
+          </div>
+          <div>
+            <input
+              type="checkbox"
+              id={"api"}
+              name={"api"}
+              value={"api"}
+              onChange={handleCheckboxChange}
+            />
+            <label htmlFor={"Api"}>{"Api"}</label>
+          </div>
+
           <button onClick={handleReset}>RESET</button>
         </div>
 

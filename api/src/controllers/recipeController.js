@@ -184,6 +184,7 @@ const getAllRecipes = async () => {
       resumenDelPlato: recipe.resumenDelPlato,
       pasoAPaso: recipe.pasoAPaso,
       diets: diets,
+      created: true
     };
   });
 

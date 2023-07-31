@@ -1,4 +1,4 @@
-import { ADD_RECIPES, NEXT_PAGE, PREV_PAGE, ADD_DIETS, FILTER, ORDER, ORDER_BYDIET, FILTER_BY_DIETS, RESET, FILTER_BY_NAME } from "./actions";
+import { ADD_RECIPES, NEXT_PAGE, PREV_PAGE, ADD_DIETS, FILTER, ORDER, ORDER_BYDIET, FILTER_BY_DIETS, RESET, FILTER_BY_NAME, FILTER_BY_CREATED } from "./actions";
 
 
 
@@ -67,6 +67,11 @@ case ORDER:
           : newOrderHealthscore.sort((a, b) => b.healthScore - a.healthScore), // Orden descendente por healthscore
     };
     case FILTER_BY_DIETS:
+      return {
+        ...state,
+        recipes: payload, // Actualizamos las recetas filtradas
+      };
+    case FILTER_BY_CREATED:
       return {
         ...state,
         recipes: payload, // Actualizamos las recetas filtradas
