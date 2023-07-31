@@ -58,10 +58,7 @@ const getRecipeByIdHandler = async (req, res) => {
 
 
 const getAllRecipeHandler = async (req, res) => {
-  //preguntar si hay por query name ?
-  //si hay hacer una funcion que me traiga la receta con sus atributos y sus dietas asociadas
-  //si no hay traeme todas la recetas que encuentres
-  //declarar una constante que va a tener el valor de uno u otro resultado y eso es lo que se va a devolver
+
 
   try {
     const { name } = req.query;
@@ -71,19 +68,7 @@ const getAllRecipeHandler = async (req, res) => {
     res.status(400).json({ error: error.message });
   }
 
-  // ---------------------------------------------Limpiar y combinar las recetas de la API
-  // const recipesJustClean = cleanRecipesInfo(recipesApi);
-  // const filteredApi = name
-  //   ? recipesJustClean.filter((el) =>
-  //       el.name.toLowerCase().includes(name.toLowerCase())
-  //     )
-  //   : recipesJustClean;
-
-  // -----------------------------Combinar las recetas de la base de datos con las recetas limpias de la API
-  // const allRecipes = [...recipesBdd, ...filteredApi];
-
-  // Eliminar dietas duplicadas
-  // const dietsApi = [...new Set(allRecipes.flatMap((recipe) => recipe.diets))];
+  
 };
 
 module.exports = {
