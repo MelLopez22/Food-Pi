@@ -51,12 +51,16 @@ function Detail() {
       <div className={'bottomRow'}>
         <p>Paso a paso: </p>
         <ul>
-          {recipe.pasoAPaso?.map((step, index) => (
-            <li key={index}>
-              {step.number} : {step.step}
-            </li>
-          ))}
-        </ul>
+  {recipe.pasoAPaso?.map((step, index) => {
+    const numStep = index + 1; // Calcula el número del paso sumando 1 al índice
+    return (
+      <li key={numStep}>
+        {numStep}: {step.step}
+      </li>
+    );
+  })}
+</ul>
+
       </div>
     </div>
   );
