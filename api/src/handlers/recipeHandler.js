@@ -1,9 +1,6 @@
 const { getRecipe, getRecipeByName, getAllRecipes } = require("../controllers/recipeController");
 const { Recipes, Diets } = require("../db");
-const axios = require("axios");
-const {Op} = require('sequelize')
 require("dotenv").config();
-const { API_KEY } = process.env;
 
 
 

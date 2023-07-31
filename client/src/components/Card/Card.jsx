@@ -6,6 +6,7 @@ const Card = ({ name, image, diets, id, healthScore }) => {
   console.log(healthScore, 'HEALTHSCORE')
   return (
     <Link to={`/detail/${id}`}>
+
     <div className="card">
      <img className="card-image" src={image} alt={name} />
       
@@ -18,8 +19,8 @@ const Card = ({ name, image, diets, id, healthScore }) => {
           ))}
         </ul>
       </div>
-    </div>
-    </Link>
+    </div>     </Link>
+
 
   );
 };

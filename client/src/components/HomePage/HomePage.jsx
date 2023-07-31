@@ -31,11 +31,21 @@ export default function Homepage() {
       try {
         const response = (await axios.get("http://localhost:3001/recipes"))
           .data;
-        const responseDiets = (await axios.get("http://localhost:3001/diets"))
-          .data;
+          dispatch(addRecipes(response));
 
-        dispatch(addRecipes(response));
-        dispatch(addDiets(responseDiets));
+          console.log('data diets', (await axios.get("http://localhost:3001/diets")).data)
+//verificar si existe diets , y si length es igual a cero hacer la peticion , si no nada 
+if (diets && diets.length === 0) {
+  const responseDiets = (await axios.get("http://localhost:3001/diets")).data;
+  if (responseDiets.length > 0) {
+    dispatch(addDiets(responseDiets));
+  }
+}
+
+
+          
+        
+
         setIsChecked(false);
       } catch (error) {
         console.error("Error al obtener los datos:", error);

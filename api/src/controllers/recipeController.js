@@ -4,17 +4,15 @@ const { API_KEY } = process.env;
 const axios = require("axios");
 const { Op } = require("sequelize");
 
-
-
-
-//------------------------LIMPIEZA DE ARRAY
 const cleanningArray = (arr) => {
   if (Array.isArray(arr)) {
     return arr.map((el) => {
       //limpiar analizedintruccions
       const cleanningInfoApi = el.analyzedInstructions[0]?.step?.steps;
       const pasoapaso = cleanningInfoApi.map((e) => {
-        return { number: e.number, step: e.step };
+
+        // return { number: e.number, step: e.step };
+        return { step: e.step };
       });
 
       return {
@@ -32,7 +30,8 @@ const cleanningArray = (arr) => {
     // Si arr es un objeto, creamos un nuevo objeto con la información deseada
     const cleanAnalizedInstructions = arr.analyzedInstructions[0]?.steps;
     const pasoAPasoCLEAN = cleanAnalizedInstructions.map((e) => {
-      return { number: e.number, step: e.step };
+      return { step: e.step };
+          // return { number: e.number, step: e.step };
     });
 
     return {
@@ -50,19 +49,15 @@ const cleanningArray = (arr) => {
     return [];
   }
 };
-//ARCHI LISTO NO SE TOCA MASSSSS
 const getRecipe = async (id, source) => {
-  //si es x api
+  //si viene de la api
   if (source === "api") {
     const recipeApi = (
-      await axios(`https://api.spoonacular.com/recipes/${id}/information?apiKey=${API_KEY}`)
+      await axios(`https://api.spoonacular.com/recipes/${id}/information?apiKey=${API_KEY}`
+      )
     ).data;
-    console.log(typeof recipeApi, "tipo de dato de la api");
-    //limpio la info cruda --------funcion para limpiar la infocruda
     const recipeApiCleaned = cleanningArray(recipeApi);
-    // recipeApiCleaned.pasoAPaso = formatSteps(recipeApiCleaned.pasoAPaso);
-
-    //si todo salio bien deberia estar devolviendo un array con los datos limpios
+   
     return recipeApiCleaned;
   } //si es x bdd
   else {
@@ -98,6 +93,7 @@ const getRecipeByName = async (name) => {
       DietId: diet.RecipeDiet.DietId,
     }));
 
+
     return {
       id: recipe.id,
       name: recipe.name,
@@ -111,7 +107,9 @@ const getRecipeByName = async (name) => {
   });
 
   const recipesApi = (
-    await axios.get(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY}&addRecipeInformation=true&number=100`)
+    await axios.get(
+      `https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY}&addRecipeInformation=true&number=100`
+    )
   ).data.results;
 
   const nameLower = name.toLowerCase();
@@ -120,11 +118,14 @@ const getRecipeByName = async (name) => {
     el.title.toLowerCase().includes(nameLower)
   );
 
-//mapear el nuevo array y devolver un array con objetos que esten limpios de info
-const recipesAPIcleaned = recipesApiFiltered.map(e=>{
-  // console.log(el.analyzedInstructions[0].steps)
+  //mapear el nuevo array y devolver un array con objetos que esten limpios de info
+  const recipesAPIcleaned = recipesApiFiltered.map((e) => {
+    // console.log(el.analyzedInstructions[0].steps)
 
-  const pasoapaso= e.analyzedInstructions[0].steps.map(e=>{return {number: e.number, step: e.step}})
+    const pasoapaso = e.analyzedInstructions[0].steps.map((e) => {
+      return {step: e.step };
+      // return { number: e.number, step: e.step };
+    });
     return {
       id: e.id,
       name: e.title,
@@ -134,8 +135,8 @@ const recipesAPIcleaned = recipesApiFiltered.map(e=>{
       image: e.image,
       Diets: e.diets,
       created: false,
-  }
-})
+    };
+  });
   return [...recipesBddCLEAN, ...recipesAPIcleaned];
 };
 
@@ -152,9 +153,10 @@ const getAllRecipes = async () => {
   const recipesBddCLEAN = recipesFromDataBase.map((recipe) => {
     const diets = recipe.Diets.map((diet) => ({
       name: diet.name,
-      DietId: diet.RecipeDiet.DietId}))
+      DietId: diet.RecipeDiet.DietId,
+    }));
 
-  return {
+    return {
       id: recipe.id,
       name: recipe.name,
       resumenDelPlato: recipe.resumenDelPlato,
@@ -164,13 +166,13 @@ const getAllRecipes = async () => {
       Diets: diets,
       created: true,
     };
-
-    })
-
+  });
 
   // Recetas de la API
   const recipesFromApi = (
-    await axios.get(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY}&addRecipeInformation=true&number=100`)
+    await axios.get(
+      `https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY}&addRecipeInformation=true&number=100`
+    )
   ).data.results;
 
   //me trae un array
@@ -178,18 +180,19 @@ const getAllRecipes = async () => {
   // console.log(recipesFromApi[0].analyzedInstructions[0].steps)
   // console.log(recipesFromApi[0].analyzedInstructions[0].steps[0].number,recipesFromApi[0].analyzedInstructions[0].steps[0].step )
 
-
   const recipesApiCleaned = recipesFromApi.map((recipe) => {
-// console.log(recipe.analyzedInstructions[0].steps)
-//mapear steps recordar q es un array 
-const stepsARR = recipe.analyzedInstructions[0]?.steps?.map(e=>{
-  return {
-    number: e.number,
-    step: e.step
-  }
-})
-console.log(stepsARR)//esto me devuelve un array limpio de info 
-
+    // console.log(recipe.analyzedInstructions[0].steps)
+    //mapear steps recordar q es un array
+    const stepsARR = recipe.analyzedInstructions[0]?.steps?.map((e) => {
+      return {
+        step: e.step,
+      };
+      // return {
+      //   number: e.number,
+      //   step: e.step,
+      // };
+    });
+    console.log(stepsARR); //esto me devuelve un array limpio de info
 
     return {
       id: recipe.id,
@@ -201,11 +204,10 @@ console.log(stepsARR)//esto me devuelve un array limpio de info
       Diets: recipe.diets,
       created: false,
     };
-  }); 
+  });
 
   // Unificar recetas de la base de datos y la API
   return [...recipesBddCLEAN, ...recipesApiCleaned];
-
 };
 
 module.exports = { getRecipe, getRecipeByName, getAllRecipes };
