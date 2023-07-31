@@ -50,11 +50,12 @@ const cleanningArray = (arr) => {
 };
 const getRecipe = async (id, source) => {
   if (source === "api") {
-    const recipeApi = (await axios(`https://api.spoonacular.com/recipes/${id}/information?apiKey=${API_KEY}`
-    )
-    )
-    .data;
-    
+    const recipeApi = (
+      await axios(
+        `https://api.spoonacular.com/recipes/${id}/information?apiKey=${API_KEY}`
+      )
+    ).data;
+
     const recipeApiCleaned = cleanningArray(recipeApi);
 
     return recipeApiCleaned;
@@ -66,25 +67,24 @@ const getRecipe = async (id, source) => {
         attributes: ["name"],
       },
     });
-  //si existe la receta , si a encontro limpiarla si no la encontro devolver un mensaje que diga no se encontro receta 
-  if(recipe){
-    //limpiar el diets 
-    //retornar un objeto con las caracteristicas de siempre y a diets asignarle el valor limpio
-    const dietsNames = recipe.Diets.map((diet) => diet.name);
-   return {
-      id: recipe.id,
-      name: recipe.name,
-      resumenDelPlato: recipe.resumenDelPlato,
-      healthScore: recipe.healthScore,
-      pasoAPaso: recipe.pasoAPaso,
-      image: recipe.image,
-      Diets: dietsNames,
-      created: true,
-    };
-
-  }else{
-    'No se encontro la receta buscada'
-  }
+    //si existe la receta , si a encontro limpiarla si no la encontro devolver un mensaje que diga no se encontro receta
+    if (recipe) {
+      //limpiar el diets
+      //retornar un objeto con las caracteristicas de siempre y a diets asignarle el valor limpio
+      const dietsNames = recipe.Diets.map((diet) => diet.name);
+      return {
+        id: recipe.id,
+        name: recipe.name,
+        resumenDelPlato: recipe.resumenDelPlato,
+        healthScore: recipe.healthScore,
+        pasoAPaso: recipe.pasoAPaso,
+        image: recipe.image,
+        Diets: dietsNames,
+        created: true,
+      };
+    } else {
+      ("No se encontro la receta buscada");
+    }
   }
 };
 
@@ -101,24 +101,26 @@ const getRecipeByName = async (name) => {
     },
   });
 
-  const recipesBddCLEAN = recipesBdd.map((recipe) => {
-    console.log(recipe, "esto es cada elemento del array q vino de la bdd");
-    const diets = recipe.Diets.map((diet) => ({
-      name: diet.name,
-      DietId: diet.RecipeDiet.DietId,
-    }));
+  if (recipesBdd) {
+    //esto es un array mapear el array y en cada paso .Diets mapear y limpiar
+    //limpiar el diets
+    //retornar un objeto con las caracteristicas de siempre y a diets asignarle el valor limpio
 
-    return {
-      id: recipe.id,
-      name: recipe.name,
-      resumenDelPlato: recipe.resumenDelPlato,
-      healthScore: recipe.healthScore,
-      pasoAPaso: recipe.pasoAPaso,
-      image: recipe.image,
-      Diets: diets,
-      created: true,
-    };
-  });
+    const recipesBddCLEAN = recipesBdd.map((recipe) => {
+      const dietsNames = recipe.Diets.map((diet) => diet.name);
+      return {
+        id: recipe.id,
+        name: recipe.name,
+        resumenDelPlato: recipe.resumenDelPlato,
+        healthScore: recipe.healthScore,
+        pasoAPaso: recipe.pasoAPaso,
+        image: recipe.image,
+        Diets: dietsNames,
+        created: true,
+      };
+    });
+    return recipesBddCLEAN
+  }
 
   const recipesApi = (
     await axios.get(
@@ -181,7 +183,6 @@ const getAllRecipes = async () => {
 
   // Retorna el resultado final, que es un array de objetos con las recetas y las dietas
 
-
   // Recetas de la API
   const recipesFromApi = (
     await axios.get(
@@ -221,8 +222,8 @@ const getAllRecipes = async () => {
   });
 
   // Unificar recetas de la base de datos y la API
-  return [...recipesBddCLEAN, ...recipesApiCleaned];}
-
+  return [...recipesBddCLEAN, ...recipesApiCleaned];
+};
 
 // Cierre del bloque de la función getAllRecipes
 
