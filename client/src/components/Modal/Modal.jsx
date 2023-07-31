@@ -15,12 +15,10 @@ function Modal({ oncloseModal }) {
     pasoAPaso: [],
   });
 
-  // // Actualiza el estado local con el texto ingresado en el textarea
-  //   const handlePasoApaso = (e) => {
-  //     setNewStep(e.target.value);
-  //   };
-  const [newStep, setNewStep] = useState(""); // Estado local para almacenar el texto del nuevo paso
+ 
+  const [newStep, setNewStep] = useState(""); 
   const [stepsArray, setStepsArray] = useState([]); // Estado local para el array de pasos
+  //stepsarray es lo q voy a enviar a back 
 
   const handleChangeSteps = (e) => {
     setNewStep(e.target.value); // Actualiza el estado local con el texto ingresado en el textarea
@@ -28,12 +26,15 @@ function Modal({ oncloseModal }) {
 
   const handleAgregar = () => {
     if (newStep.trim() !== "") {
-      // Verifica que el texto ingresado no esté vacío (sin contar espacios en blanco)
-      setStepsArray([...stepsArray, { step: newStep }]); // Agrega el nuevo paso al array
-      setNewStep(""); // Limpia el estado local para el próximo paso
+      setStepsArray([...stepsArray, { step: newStep }]);
+      setNewStep("");
+      setData(prevData => ({
+        ...prevData,
+        pasoAPaso: [...stepsArray, { step: newStep }]
+      }));
     }
   };
-
+  
   const handleChange = (e) => {
     const { name, value } = e.target;
     setData({
@@ -66,7 +67,7 @@ function Modal({ oncloseModal }) {
   //   };
 
   return (
-    console.log('soy el array de steps', stepsArray[0].step),
+    console.log('soy el paso a paso de data', data.pasoAPaso),
     <div className="modal-container">
       <div className="modal-background" onClick={oncloseModal}></div>
       <div className="modal-content-container">
