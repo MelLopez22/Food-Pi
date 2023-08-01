@@ -66,19 +66,18 @@ export default function Homepage() {
   const handleCheckboxChange = (event) => {
     const { name, value, checked } = event.target;
     //si value corresponde a bdd o api , si es bdd comparar de recipes.create: true, si es de api created:false
-    if(name === 'api'){
-      const filterAPI= recipes.filter(e=>{
-        return e.created === false
-      })
-
-      dispatch(filterByCreated(filterAPI))
-    }else if(name === 'bdd'){
-      const filterBDD= recipes.filter(e=>{
-        return e.created === true
+    if (name === "api") {
+      const filterAPI = recipes.filter((e) => {
+        return e.created === false;
       });
-      dispatch(filterByCreated(filterBDD))
 
-    }else {
+      dispatch(filterByCreated(filterAPI));
+    } else if (name === "bdd") {
+      const filterBDD = recipes.filter((e) => {
+        return e.created === true;
+      });
+      dispatch(filterByCreated(filterBDD));
+    } else {
       const filtrado = checked
         ? recipes.filter((e) => {
             return e.diets.some(
@@ -86,10 +85,9 @@ export default function Homepage() {
             );
           })
         : recipes; // Si no hay filtro activo, mantener las recetas sin cambios
-    
+
       dispatch(filterByDiets([...filtrado]));
     }
-  
   };
 
   const handleReset = () => {

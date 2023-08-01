@@ -1,47 +1,7 @@
-/* Estilos generales para la aplicación */
-@import url('https://fonts.googleapis.com/css2?family=Gaegu:wght@700&display=swap');
-
-/* body {
-  margin: 0;
-  padding: 0;
-  font-family: Arial, sans-serif;
-  color: white;
-} */
-
-/* Estilos para la imagen de fondo */
-/* .app {
-  background-image: url('../src/img/school-board-empty-slate.jpg');
-  background-position: center;
-  height: 100vh; 
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-} */
-  /* background-size: cover; */
-
-
-/* .app-content {
-  max-width: 800px;
-  padding: 20px;
-} */
-
-/* .app a {
-  color: white;
-  text-decoration: none;
+.black-background {
+  background-color: #000;
+  color: #fff; 
 }
 
-.app h1 {
-  margin-bottom: 20px;
-}
 
-.app h2 {
-  font-size: 24px;
-  margin-bottom: 10px;
-}
 
-.app p {
-  font-size: 16px;
-  line-height: 1.5;
-  margin-bottom: 20px;
-} */
