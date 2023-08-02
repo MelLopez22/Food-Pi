@@ -14,9 +14,7 @@ function Cards() {
 
   return (
     <div className={styles.cardsContainer}>
-      <div className={styles.paginate}>
-        <Paginate cantidadPages={cantidadPages} />
-      </div>
+   
 
       <div className={styles.recipes}>
         {viewRecipes?.map((el) => {

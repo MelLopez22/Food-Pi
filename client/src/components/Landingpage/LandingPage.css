@@ -2,8 +2,8 @@
 .landing-page {
   position: relative;
   min-height: 100vh;
-  background-image: url('../../img/fondo\ gris2.jpg');
-  background-size: cover;
+  /* background-image: url('../../img/fondo\ gris2.jpg');
+  background-size: cover; */
   display: flex;
   justify-content: center;
   align-items: center; 

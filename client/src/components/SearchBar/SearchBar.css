@@ -1,21 +1,44 @@
-/* Estilos para el SearchBar */
-.SearchBar{
-white-space: nowrap;}
-  
-  .SearchBar label {
-    color: white; /* Cambia el color del texto del label a blanco */
-    margin-bottom: 5px;
-  }
-  
-  .SearchBar input {
-    padding: 8px;
-    border: none;
-    border-radius: 5px; /* Ajusta el valor para controlar el redondeo de los bordes */
-  }
-  
-  /* Estilos adicionales para mejorar la apariencia */
-  .SearchBar input:focus {
-    outline: none; /* Elimina el borde de enfoque al hacer clic en el input */
-    box-shadow: 0 0 5px rgba(255, 255, 255, 0.5); /* Agrega una sombra tenue al hacer clic en el input */
-  }
-  
+/* Estilos para la barra de búsqueda */
+.searchBar {
+  display: flex;
+  max-width: 400px;
+  border-radius: 20px;
+  overflow: hidden;
+  background-color: grey;
+  box-shadow: 0 2px 4px  #f5f0f0;
+  margin: 20px;
+}
+
+/* Estilos para el label */
+.searchLabel {
+  flex: 1;
+  padding: 10px;
+  font-size: 16px;
+  color: #ffffff;
+  font-size: 15px;
+}
+
+/* Estilos para el wrapper que contiene el input y el botón */
+.searchWrapper {
+  display: flex;
+  align-items: center;
+}
+
+/* Estilos para el campo de entrada */
+.searchInput {
+  flex: 1;
+  padding: 10px;
+  border: none;
+  border-radius: 20px ;
+  font-size: 16px;
+  outline: none;
+  background-color: rgba(255, 255, 255, 0.9);
+}
+
+.searchInput:focus {
+  border: 2px solid  #f5f0f0;
+}
+
+
+
+

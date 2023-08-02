@@ -1,7 +1,16 @@
 .cardsFilterOrder{
     display: flex;
     justify-content: space-evenly;
-    background-image: url(https://i.pinimg.com/564x/55/73/b0/5573b095b47326fdfb1585fed10c06bc.jpg);
+    /* background-image: url(https://i.pinimg.com/564x/55/73/b0/5573b095b47326fdfb1585fed10c06bc.jpg); */
     padding: 30px;
 
+}
+.order{
+    padding-top: 100px;padding-left: 20px;
+}
+
+.order label, h3{
+    color: white;
+}.order input{
+    margin: 10px;
 }

@@ -27,9 +27,20 @@ function SearchBar() {
   };
 
   return (
-    <div className="SearchBar">
-      <label htmlFor="">BUSCAR RECETAS POR NOMBRE</label>
-      <input type="text" name="search" value={searchValue} onChange={handleSearch} />
+    <div className="searchBar">
+      <label htmlFor="search" className="searchLabel">
+        Buscar por nombre 
+      </label>
+      <div className="searchWrapper">
+        <input
+          type="text"
+          name="search"
+          value={searchValue}
+          onChange={handleSearch}
+          className="searchInput"
+        />
+      
+      </div>
     </div>
   );
 }

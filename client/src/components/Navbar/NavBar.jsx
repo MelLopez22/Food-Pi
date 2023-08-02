@@ -6,7 +6,6 @@ import SearchBar from "../SearchBar/SearchBar";
 import { Link } from "react-router-dom";
 import styles from "./NavBar.module.css";
 import logoFood from "../../img/logos/food_mel.jpeg";
-import "../../styles.css";
 
 const NavBar = () => {
   const [modalVisible, setModalVisible] = useState(false);
@@ -22,11 +21,7 @@ const NavBar = () => {
 
   return (
     <div className={styles.navbarContainer}>
-      <div>
-          <Link to="/homepage">
-        <img src={logoFood} alt="LOGO" />
-      </Link>
-      </div>
+    
 
 
     <div>
@@ -35,7 +30,7 @@ const NavBar = () => {
     </div>
 
       <div className={styles.navbarRight}>
-        <button className="btn" onClick={handleOpenModal}>
+        <button className={styles.btn} onClick={handleOpenModal}>
           CREAR RECETA
         </button>
       </div>

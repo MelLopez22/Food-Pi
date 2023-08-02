@@ -104,7 +104,7 @@ export default function Homepage() {
         
           {/* filtro y orden */}
 
-          <div>
+          <div className={styles.order}>
             {/* ordenar por name */}
             <select
               name="order"

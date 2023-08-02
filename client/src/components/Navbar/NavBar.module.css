@@ -1,10 +1,10 @@
 /* NavBar.module.css */
 
 .navbarContainer {
-  background-color: #333;
+  background-color: #9e71447e;
   color: #fff;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   padding: 10px 20px;
   position: fixed;
@@ -28,13 +28,17 @@
 }
 
 .navbarRight .btn {
-  background-color: #fff;
-  color: #333;
+  background-color: #4f4848;
+  color: #f5f0f0;
   border-radius: 5px;
-  padding: 10px 20px;
   border: none;
+  padding: 15px;
   cursor: pointer;
-  font-size: 16px;
+  font-size: 9px;
+}
+.navbarRight .btn:hover{
+  background-color: rgb(212, 207, 207);
+  color:#4f4848;
 }
 
 @media screen and (max-width: 768px) {
