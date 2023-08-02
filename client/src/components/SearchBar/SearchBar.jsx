@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { filterName, reset } from "../../Redux/actions";
+import "./SearchBar.css"; // Asegúrate de importar tu archivo de estilos CSS
 
 function SearchBar() {
   const dispatch = useDispatch();
@@ -26,7 +27,7 @@ function SearchBar() {
   };
 
   return (
-    <div>
+    <div className="SearchBar">
       <label htmlFor="">BUSCAR RECETAS POR NOMBRE</label>
       <input type="text" name="search" value={searchValue} onChange={handleSearch} />
     </div>

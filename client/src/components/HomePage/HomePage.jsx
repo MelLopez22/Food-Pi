@@ -100,67 +100,75 @@ export default function Homepage() {
       <NavBar />
 
       <div className={styles.content}>
-        {/* cards */}
-        <div className={styles.sideCards}>
-          <Cards />
-        </div>
-        <div>
-          {/* ordenar por name */}
-          <select name="order" defaultValue={"DEFAULT"} onChange={handleOrder}>
-            <option value="DEFAULT" disabled>
-              Select Order
-            </option>
-            <option value="A">Ascendente</option>
-            <option value="D">Descendente</option>
-          </select>
-          {/* ordenar por healthscore */}
-          <select
-            name="orderByHealthscore"
-            defaultValue="DEFAULT"
-            onChange={handleOrder}
-          >
-            <option value="DEFAULT" disabled>
-              Ordenar por Healthscore{" "}
-            </option>
-            <option value="A">Ascendente</option>
-            <option value="D">Descendente</option>
-          </select>
-          {/* filtrado */}
-          <h3>FILTRADO POR TIPO DE DIETA</h3>
-          {diets.map((name) => (
-            <div key={name}>
+        <div className={styles.cardsFilterOrder}>
+        
+          {/* filtro y orden */}
+
+          <div>
+            {/* ordenar por name */}
+            <select
+              name="order"
+              defaultValue={"DEFAULT"}
+              onChange={handleOrder}
+            >
+              <option value="DEFAULT" disabled>
+                Select Order
+              </option>
+              <option value="A">Ascendente</option>
+              <option value="D">Descendente</option>
+            </select>
+            {/* ordenar por healthscore */}
+            <select
+              name="orderByHealthscore"
+              defaultValue="DEFAULT"
+              onChange={handleOrder}
+            >
+              <option value="DEFAULT" disabled>
+                Ordenar por Healthscore{" "}
+              </option>
+              <option value="A">Ascendente</option>
+              <option value="D">Descendente</option>
+            </select>
+            {/* filtrado */}
+            <h3>FILTRADO POR TIPO DE DIETA</h3>
+            {diets.map((name) => (
+              <div key={name}>
+                <input
+                  type="checkbox"
+                  id={name}
+                  name={name}
+                  value={name}
+                  onChange={handleCheckboxChange}
+                />
+                <label htmlFor={name}>{name}</label>
+              </div>
+            ))}
+            <div>
               <input
                 type="checkbox"
-                id={name}
-                name={name}
-                value={name}
+                id={"bdd"}
+                name={"bdd"}
+                value={"bdd"}
                 onChange={handleCheckboxChange}
               />
-              <label htmlFor={name}>{name}</label>
+              <label htmlFor={"bdd"}>{"Bdd"}</label>
             </div>
-          ))}
-          <div>
-            <input
-              type="checkbox"
-              id={"bdd"}
-              name={"bdd"}
-              value={"bdd"}
-              onChange={handleCheckboxChange}
-            />
-            <label htmlFor={"bdd"}>{"Bdd"}</label>
-          </div>
-          <div>
-            <input
-              type="checkbox"
-              id={"api"}
-              name={"api"}
-              value={"api"}
-              onChange={handleCheckboxChange}
-            />
-            <label htmlFor={"Api"}>{"Api"}</label>
-          </div>
+            <div>
+              <input
+                type="checkbox"
+                id={"api"}
+                name={"api"}
+                value={"api"}
+                onChange={handleCheckboxChange}
+              />
+              <label htmlFor={"Api"}>{"Api"}</label>
+            </div>
 
-          <button onClick={handleReset}>RESET</button>
+            <button onClick={handleReset}>RESET</button>
+          </div>  {/* cards */}
+          <div className={styles.sideCards}>
+            <Cards />
+          </div>
         </div>
 
         <div></div>

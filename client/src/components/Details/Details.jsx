@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import "./Details.css"
+import NavBar from "../Navbar/NavBar";
 function Detail() {
   const [recipe, setRecipe] = useState({});
   const { id } = useParams();
@@ -30,14 +31,14 @@ function Detail() {
 
   return (
     <div className='detailContainer'>
-        <h1>NAME {recipe.name}</h1>
+      <NavBar/>
+        <h1>{recipe.name}</h1>
       <div className="div-columns">
                 {/* Columna Izquierda */}
                 <div className='leftColumn'>
                 {/* Utilizar dangerouslySetInnerHTML para renderizar el contenido HTML */}
                 <p dangerouslySetInnerHTML={{ __html: recipe.resumenDelPlato }} />
-                <p>HEALTHSCORE {recipe.healthScore}</p>
-                <p>{/* Aquí puedes mostrar las dietas */}</p>
+                <p className="healthScore">HEALTHSCORE {recipe.healthScore}</p>
                 </div>
 
                 {/* Columna Derecha */}

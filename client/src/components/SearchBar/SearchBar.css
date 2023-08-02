@@ -1,0 +1,21 @@
+/* Estilos para el SearchBar */
+.SearchBar{
+white-space: nowrap;}
+  
+  .SearchBar label {
+    color: white; /* Cambia el color del texto del label a blanco */
+    margin-bottom: 5px;
+  }
+  
+  .SearchBar input {
+    padding: 8px;
+    border: none;
+    border-radius: 5px; /* Ajusta el valor para controlar el redondeo de los bordes */
+  }
+  
+  /* Estilos adicionales para mejorar la apariencia */
+  .SearchBar input:focus {
+    outline: none; /* Elimina el borde de enfoque al hacer clic en el input */
+    box-shadow: 0 0 5px rgba(255, 255, 255, 0.5); /* Agrega una sombra tenue al hacer clic en el input */
+  }
+  

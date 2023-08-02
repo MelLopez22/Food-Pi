@@ -5,6 +5,9 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+    margin: 0; /* Elimina los márgenes predeterminados del body */
+    padding: 0; /* Elimina los rellenos predeterminados del body */
+    background-color: grey;
 }
 
 code {

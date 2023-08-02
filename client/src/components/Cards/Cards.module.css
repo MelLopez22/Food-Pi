@@ -6,7 +6,13 @@
   margin: 0; /* Elimina cualquier margen */
   padding: 0; /* Elimina cualquier padding */
   /* overflow: hidden; Evita que el contenido sobresalga del contenedor */
+  background-image: url(../../img//fondo-cards.jpg);
   
+}
+.recipes{
+  background-image: url(../../img//fondo-cards.jpg);
+  padding: 20px;
+
 }
 
 .paginate, .recipes{

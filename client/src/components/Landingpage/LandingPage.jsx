@@ -2,18 +2,16 @@ import { Link } from "react-router-dom";
 import "./LandingPage.css"; // Asegúrate de importar tu archivo de estilos CSS
 import linkedin from "../../../src/img/logos/linkedin.png";
 import github from "../../../src/img/logos/github.png";
-// import fondo from '../../img/fondo.jpg'
+import '../../styles.css'
 
 export default function LandingPage() {
   return (
     <div className="landing-page">
-    <div className="image-background">
-      {/* <img src={fondo} alt="fondo" /> */}
-    </div>
+   
 
       <div className="landing-elements-container">
 
-
+        
         <h1>Food</h1>
 
         <div className="social-links">
@@ -34,9 +32,11 @@ export default function LandingPage() {
           </a>
         </div>
 
-        <Link to="/homepage">
-          <button className="enter-button">INGRESAR</button>
+        <Link to='/homepage'>
+          <button className="btn">INGRESAR</button>
         </Link>
+
+      
 
 
       </div>

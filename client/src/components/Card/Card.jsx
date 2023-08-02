@@ -9,7 +9,7 @@ const Card = ({ name, image, diets, id, healthScore }) => {
 
         <div className="card-content">
           <h3 className="card-name">{name}</h3>
-          <h3 className="card-name">HEALTHSCORE {healthScore}</h3>
+          <h3 className="card-name">Heathscore: {healthScore}</h3>
           <ul className="card-diets">
             {diets?.map((diet, index) => (
               <li key={index}>{diet}</li>

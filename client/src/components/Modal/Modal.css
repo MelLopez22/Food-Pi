@@ -36,8 +36,8 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  position: relative;
   /* Puedes agregar más estilos según tus necesidades */
+  /* padding: 30px; */
 }
 
 /* Modal Content */
@@ -49,19 +49,26 @@
   width: 100%; /* Ocupar todo el ancho disponible */
   height: 100%; /* Ocupar todo el alto disponible */
   /* Agrega aquí los estilos adicionales que necesites */
+  position: relative;
+
 }
 .modal-content h1{
   font-size: 15px;
 }
 .close-title-content{
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
 }
 .close-title-content button{
   position: absolute;
   top: 0;
   right: 0;
   padding: 10px;
+}
+.modal-buttons{
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .form-container label{
@@ -75,12 +82,17 @@
 .data-container {
   display: flex;
   flex-direction: column;
+
+}
+.data-container label{
+font-size: 10px;
 }
 
 .input-group {
   display: flex;
   flex-direction: column;
-  margin-bottom: 10px;
+  /* margin-bottom: 10px; */
+  height: auto;
 }
 
 .input-group label {
@@ -121,6 +133,9 @@
   margin: 0;
   padding: 0;
   overflow: hidden;
+}
+.textarea-container h3{
+font-size: 20px;
 }
 .steps-container{
   display: flex;

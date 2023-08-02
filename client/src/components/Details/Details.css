@@ -2,7 +2,17 @@
 
 .detailContainer {
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
+    height: 100vh; /* El contenedor ocupa toda la altura del viewport */
+    box-sizing: border-box; /* El padding se incluye en el ancho y alto */
+   
+    padding: 30px;
+    background-color: grey;
+}
+.detailContainer h1{
+  color: black;
+  font-size: 50px;
+  padding: 20px;
 }
 .div-columns{
   display: flex;
@@ -10,11 +20,18 @@
 
 .leftColumn,
 .rightColumn {
-  padding: 50px;
+  padding: 5px;
     flex: 1; /* Hace que ambos divs ocupen el mismo espacio en el contenedor */
     width: 50%; /* Ocupan el 50% del ancho del contenedor padre */
     height: 50vh; /* Ocupan el 50% de la altura del contenedor padre (puedes ajustar la altura según tus necesidades) */
     /* Agrega otros estilos según tus necesidades */
+  border: 1px solid rgb(180, 174, 174);
+    ;
+  }
+  .leftColumn p, a{
+    color: white;
+    font-size: 12px;
+
   }
 
 
@@ -27,4 +44,6 @@
 .bottomRow {
   width: 100%;
   padding: 16px;
+  color: white;
+  font-size: 12px;
 }
