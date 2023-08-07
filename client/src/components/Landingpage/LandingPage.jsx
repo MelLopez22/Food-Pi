@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import "./LandingPage.css"; // Asegúrate de importar tu archivo de estilos CSS
+import "./LandingPage.css"; 
 import linkedin from "../../../src/img/logos/linkedin.png";
 import github from "../../../src/img/logos/github.png";
 import '../../styles.css'

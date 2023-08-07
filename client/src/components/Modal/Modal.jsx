@@ -18,8 +18,7 @@ function Modal({ oncloseModal }) {
 
   const [newStep, setNewStep] = useState("");
   const [stepsArray, setStepsArray] = useState([]);
-  // Estado local para el array de pasos
-  //stepsarray es lo q voy a enviar a back
+
   const [dietsArr, setDietsArr] = useState([]);
   const initialErrors = {
     name: "Este campo debe llenarse",
@@ -32,21 +31,17 @@ function Modal({ oncloseModal }) {
     const { name, value, checked } = event.target;
 
     if (checked) {
-      // Si el checkbox está marcado (checked=true), agrega el valor al array de dietsArr
       setDietsArr((prevDietsArr) => {
         if (!prevDietsArr.includes(value)) {
-          // Si el valor aún no está en el array, agrégalo
           setData((prevData) => ({
             ...prevData,
             diets: [...prevDietsArr, value],
           }));
           return [...prevDietsArr, value];
         }
-        // Si el valor ya está en el array, no es necesario agregarlo nuevamente
         return prevDietsArr;
       });
     } else {
-      // Si el checkbox está desmarcado (checked=false), remueve el valor del array de dietsArr
       setDietsArr((prevDietsArr) =>
         prevDietsArr.filter((item) => item !== value)
       );
@@ -89,7 +84,6 @@ function Modal({ oncloseModal }) {
       errors.pasoAPaso = "debe colocar a menos un paso";
     }
 
-    // Retorna true si no hay errores
     return errors;
   };
 
@@ -110,7 +104,7 @@ function Modal({ oncloseModal }) {
       }));
     }
 
-    setErrors(validate()); // Actualiza el estado de errores con los mensajes de error actualizados
+    setErrors(validate()); 
   };
 
   const handleSubmit = async (e) => {
@@ -132,9 +126,7 @@ function Modal({ oncloseModal }) {
   };
 
   return (
-    console.log("TODO LO Q HAY EN DATA QUE SE VA A ENVIAR A M BACK", data),
-    console.log("valores de mi array de tipos de dietas", dietsArr),
-    console.log("ERRORS", errors),
+   
     (
       <div className="modal-container">
         <div className="modal-background" onClick={oncloseModal}></div>
@@ -236,7 +228,7 @@ function Modal({ oncloseModal }) {
                   <ul className="ul-content">
                     {stepsArray.map((step, index) => {
                       console.log(stepsArray, "soy el array dentro del mapeo");
-                      let numStep = index + 1; // Calcula el número del paso sumando 1 al índice
+                      let numStep = index + 1; 
                       return (
                         <li className="li-content" key={numStep}>
                           {numStep}: {step.step}
@@ -246,13 +238,11 @@ function Modal({ oncloseModal }) {
                   </ul>
                 </div>
                 <div className="modal-buttons">
-                  {/* Mostrar el botón de "Aceptar" solo si no hay errores */}
-                  {/* Mostrar el botón de "Aceptar" solo si no hay errores */}
-                  {Object.values(errors).every((error) => error === "") && (
+          
                     <button type="submit" onClick={handleSubmit}>
                       Aceptar
                     </button>
-                  )}
+                
                   <button onClick={oncloseModal}>Cancelar</button>
                 </div>
               </form>

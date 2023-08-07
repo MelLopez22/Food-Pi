@@ -1,4 +1,3 @@
-// import { useDispatch } from "react-redux";
 import styles from './Paginate.module.css'
 
 import { useDispatch, useSelector } from "react-redux";

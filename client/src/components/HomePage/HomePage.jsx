@@ -18,7 +18,7 @@ import {
   reset,
 } from "../../Redux/actions";
 import styles from "./HomePage.module.css";
-// import styles from "./Home.module.css";
+import LoadingSpinner from "../Loader/Loader";
 
 export default function Homepage() {
   const dispatch = useDispatch();
@@ -26,10 +26,12 @@ export default function Homepage() {
   const { recipes } = useSelector((state) => state);
   const [selectedCheckboxes, setSelectedCheckboxes] = useState([]);
   const [isChecked, setIsChecked] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
+        setIsLoading(true)
         const response = (await axios.get("http://localhost:3001/recipes"))
           .data;
         dispatch(addRecipes(response));
@@ -43,8 +45,10 @@ export default function Homepage() {
         }
 
         setIsChecked(false);
+        setIsLoading(false)
       } catch (error) {
         console.error("Error al obtener los datos:", error);
+        setIsLoading(false)
       }
     };
 
@@ -61,11 +65,9 @@ export default function Homepage() {
     }
   };
 
-  //manejador de filtrado x dietas
-  //solo esta hecho x tipos de dietas
+
   const handleCheckboxChange = (event) => {
     const { name, value, checked } = event.target;
-    //si value corresponde a bdd o api , si es bdd comparar de recipes.create: true, si es de api created:false
     if (name === "api") {
       const filterAPI = recipes.filter((e) => {
         return e.created === false;
@@ -84,7 +86,7 @@ export default function Homepage() {
               (diet) => diet.toLowerCase() === value.toLowerCase()
             );
           })
-        : recipes; // Si no hay filtro activo, mantener las recetas sin cambios
+        : recipes; 
 
       dispatch(filterByDiets([...filtrado]));
     }
@@ -97,15 +99,14 @@ export default function Homepage() {
 
   return (
     <div className={styles.container}>
+      {isLoading? <LoadingSpinner/>:(<div >
       <NavBar />
 
       <div className={styles.content}>
         <div className={styles.cardsFilterOrder}>
         
-          {/* filtro y orden */}
 
           <div className={styles.order}>
-            {/* ordenar por name */}
             <select
               name="order"
               defaultValue={"DEFAULT"}
@@ -117,7 +118,6 @@ export default function Homepage() {
               <option value="A">Ascendente</option>
               <option value="D">Descendente</option>
             </select>
-            {/* ordenar por healthscore */}
             <select
               name="orderByHealthscore"
               defaultValue="DEFAULT"
@@ -129,7 +129,6 @@ export default function Homepage() {
               <option value="A">Ascendente</option>
               <option value="D">Descendente</option>
             </select>
-            {/* filtrado */}
             <h3>FILTRADO POR TIPO DE DIETA</h3>
             {diets.map((name) => (
               <div key={name}>
@@ -165,7 +164,7 @@ export default function Homepage() {
             </div>
 
             <button onClick={handleReset}>RESET</button>
-          </div>  {/* cards */}
+          </div> 
           <div className={styles.sideCards}>
             <Cards />
           </div>
@@ -175,6 +174,8 @@ export default function Homepage() {
       </div>
 
       <Footer />
+    </div>) }
     </div>
+    
   );
 }

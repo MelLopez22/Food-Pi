@@ -8,7 +8,6 @@ const recipeRoute = Router();
         recipeRoute.get('/:id', getRecipeByIdHandler)
 
 
-    // /querys
      recipeRoute.get('/', getAllRecipeHandler)
 
     
@@ -16,6 +15,3 @@ const recipeRoute = Router();
 
 module.exports = recipeRoute
 
-//     router.post('/recipes', (req, res)=>{
-//     res.status(200).send('creando una receta')
-//     })

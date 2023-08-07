@@ -2,15 +2,11 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
-  max-height: 50%;
-  margin: 0; /* Elimina cualquier margen */
-  padding: 0; /* Elimina cualquier padding */
-  /* overflow: hidden; Evita que el contenido sobresalga del contenedor */
-  /* background-image: url(../../img//fondo-cards.jpg); */
+  max-height: 50%;/* Elimina cualquier margen */
+  padding: 0; 
   
 }
 .recipes{
-  /* background-image: url(../../img//fondo-cards.jpg); */
   padding: 20px;
 
 }

@@ -1,27 +1,25 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { filterName, reset } from "../../Redux/actions";
-import "./SearchBar.css"; // Asegúrate de importar tu archivo de estilos CSS
+import "./SearchBar.css"; 
 
 function SearchBar() {
   const dispatch = useDispatch();
   const { recipes } = useSelector((state) => state);
 
-  const [searchValue, setSearchValue] = useState(""); // Estado local para mantener el valor del input
+  const [searchValue, setSearchValue] = useState(""); 
 
   const handleSearch = (event) => {
     const { value } = event.target;
-    setSearchValue(value); // Actualiza el estado local con el valor del input
+    setSearchValue(value); 
 
     if (value.trim() === "") {
-      // Si el valor del input está vacío o contiene solo espacios en blanco
-      dispatch(reset()); // Despacha la acción reset para mostrar todas las recetas
+      dispatch(reset()); 
     } else {
       const filterByName = recipes.filter((e) => {
         return e.name.toLowerCase().includes(value.toLowerCase());
       });
 
-      // Enviamos el array filtrado para modificar el estado de recetas en Redux
       dispatch(filterName(filterByName));
     }
   };

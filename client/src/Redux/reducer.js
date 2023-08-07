@@ -47,15 +47,14 @@ export default function reducer(state = initialState, { type, payload }) {
         allRecipes: typeDietFilter,
       };
 
-   // reducer.js
 case ORDER:
   const newOrder = [...state.recipesOriginal];
   return {
     ...state,
     recipes:
       payload === "A"
-        ? newOrder.sort((a, b) => (a.name > b.name ? 1 : -1)) // Orden ascendente por nombre
-        : newOrder.sort((a, b) => (b.name > a.name ? 1 : -1)), // Orden descendente por nombre
+        ? newOrder.sort((a, b) => (a.name > b.name ? 1 : -1)) 
+        : newOrder.sort((a, b) => (b.name > a.name ? 1 : -1)), 
   };
   case ORDER_BYDIET:
     const newOrderHealthscore = [...state.recipesOriginal];
@@ -63,29 +62,29 @@ case ORDER:
       ...state,
       recipes:
         payload === 'A'
-          ? newOrderHealthscore.sort((a, b) => a.healthScore - b.healthScore) // Orden ascendente por healthscore
-          : newOrderHealthscore.sort((a, b) => b.healthScore - a.healthScore), // Orden descendente por healthscore
+          ? newOrderHealthscore.sort((a, b) => a.healthScore - b.healthScore) 
+          : newOrderHealthscore.sort((a, b) => b.healthScore - a.healthScore), 
     };
     case FILTER_BY_DIETS:
       return {
         ...state,
-        recipes: payload, // Actualizamos las recetas filtradas
+        recipes: payload, 
       };
     case FILTER_BY_CREATED:
       return {
         ...state,
-        recipes: payload, // Actualizamos las recetas filtradas
+        recipes: payload,
       };
 
     case RESET:
       return {
         ...state,
-        recipes: state.recipesOriginal, // Restauramos las recetas originales
+        recipes: state.recipesOriginal, 
       };
     case FILTER_BY_NAME:
       return {
         ...state,
-        recipes: payload, // Restauramos las recetas originales
+        recipes: payload, 
       };
   default:
     return state

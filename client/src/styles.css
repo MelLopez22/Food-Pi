@@ -1,16 +1,15 @@
-/* styles.css */
 .btn {
     padding: 10px 20px;
     border: none;
     background-color: #fff;
-    color: #333; /* Color gris oscuro para las letras */
+    color: #333; 
     border-radius: 5px;
     cursor: pointer;
     font-size: 16px;
   }
   
   .btn:hover {
-    background-color: #f0f0f0; /* Color gris claro al pasar el cursor */
+    background-color: #f0f0f0; 
   }
   
   

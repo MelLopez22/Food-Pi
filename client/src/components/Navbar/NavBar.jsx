@@ -1,4 +1,3 @@
-// NavBar.js
 
 import React, { useState } from "react";
 import Modal from "../Modal/Modal";
@@ -35,7 +34,6 @@ const NavBar = () => {
         </button>
       </div>
 
-      {/* Renderizar el modal si modalVisible es true */}
       {modalVisible && <Modal oncloseModal={closeModal} />}
     </div>
   );

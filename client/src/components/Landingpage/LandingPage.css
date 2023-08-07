@@ -1,24 +1,21 @@
-/* styles.css */
 .landing-page {
   position: relative;
   min-height: 100vh;
-  /* background-image: url('../../img/fondo\ gris2.jpg');
-  background-size: cover; */
+
   display: flex;
   justify-content: center;
   align-items: center; 
-  flex-direction: column;/* Centra verticalmente */
+  flex-direction: column;
 }
 
 .landing-elements-container {
   width: 50%;
   height: 50%;
-  padding: 20px; /* Agrega un espacio interno para que los elementos no estén pegados al borde */
-  background-color: rgba(255, 255, 255, 0.8); /* Agrega un fondo transparente o semitransparente para resaltar el contenido */
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Agrega una sombra para darle un efecto de elevación */
-  text-align: center; /* Centra horizontalmente el contenido del div */
+  padding: 20px; 
+  background-color: rgba(255, 255, 255, 0.8); 
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); 
+  text-align: center; 
 
-  /* background-color: rgba(255, 255, 255, 0.5);  */
 background-color: rgba(255, 255, 255, 0.2); 
 backdrop-filter: blur;
 border-radius: 10px;
@@ -29,4 +26,3 @@ width: 50px;
 height: 50px;
 }
 
-/* Estilos adicionales para otros elementos de la página */

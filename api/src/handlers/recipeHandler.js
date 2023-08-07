@@ -4,7 +4,6 @@ require("dotenv").config();
 
 
 
-//listo ---------- CREAR UNA RECETA EN BDD
 const postRecipeHandler = async (req, res) => {
   try {
     const {
@@ -16,7 +15,6 @@ const postRecipeHandler = async (req, res) => {
       diets,
     } = req.body;
 
-    // Crea la receta
     const newRecipe = await Recipes.create({
       name,
       resumenDelPlato,
@@ -25,10 +23,8 @@ const postRecipeHandler = async (req, res) => {
       image,
     });
 
-    // Asocia las dietas a la receta
     if (diets && Array.isArray(diets) && diets.length > 0) {
       const dietsToAssociate = await Diets.findAll({ where: { id: diets } });
-      //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
       await newRecipe.setDiets(dietsToAssociate);
     }
 
@@ -38,12 +34,10 @@ const postRecipeHandler = async (req, res) => {
   }
 };
 
-//listo ---------------- TRAER UNA RECETA X ID , SEA DE BDD O DE API
 const getRecipeByIdHandler = async (req, res) => {
   try {
     const id = req.params.id;
 
-    // Verificar si el id es un número o un string con solo números
     const isNumericId = /^\d+$/.test(id);
 
     let source = isNumericId? 'api':'bdd'

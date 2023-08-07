@@ -1,13 +1,11 @@
-/* Card.css */
-
   .card {
     border: 1px solid #ccc;
     border-radius: 8px;
     padding: 16px;
     margin: 10px;
     width: 250px;
-    background-color: transparent; /* Fondo transparente */
-    box-shadow: 0 2px 4px rgba(255, 255, 255, 0.5); /* Box shadow blanco */
+    background-color: transparent;
+    box-shadow: 0 2px 4px rgba(255, 255, 255, 0.5); 
   }
   
   .card-content {
